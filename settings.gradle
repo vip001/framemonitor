@@ -1,0 +1,1 @@
+include ':app', ':framemonitor-android', ':framemonitor-android-no-op', ':framemonitor-android-common'

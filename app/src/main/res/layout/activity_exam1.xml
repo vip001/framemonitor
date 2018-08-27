@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.vip001.framemonitor.ImmersiveLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#171220"
+        android:gravity="center"
+        android:text="Example1"
+        android:textColor="#fff"
+        android:textSize="17dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="开启掉帧" />
+    <Button
+        android:id="@+id/start"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="开启检测" />
+    <ListView
+        android:id="@+id/list"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></ListView>
+</com.vip001.framemonitor.ImmersiveLinearLayout>
