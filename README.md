@@ -41,14 +41,9 @@ FrameMonitor 相当于SDK版的Systrace,可以监控App的帧率，接入后可�
 ## 接入说明
 <p style="text-indent:2em">在build.gradle文件中</p>
 <pre><code>
-buildscript {
-    repositories {
-        maven { url 'http://repo.yypm.com:8181/nexus/content/groups/public' }
-    }
-}
 dependencies {
-    debugApi "com.yy.tools:framemonitor-android:1.0.2"
-    releaseApi "com.yy.tools:framemonitor-android-no-op:1.0.2"
+     debugImplementation project(':framemonitor-android')
+     releaseImplementation project(':framemonitor-android-no-op')
 }
 </code></pre>
 <p style="text-indent:2em">在Application类中：</p>
