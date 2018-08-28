@@ -1,0 +1,75 @@
+
+**********************
+2018-08-28 11:31:09(write log time)
+
+qua = unknown
+versionName = null
+versionCode = 1
+imei = 867960034724309
+uid = uid
+network = unknown
+model = VTR-AL00
+api-level = 24 7.0
+cpu-core = 8
+process = com.vip001.framemonitor
+freeMemory = 1501804
+totalMemory = 3810300
+time = 1839
+thread-time = 37
+time-start = 08-28 11:31:07.336
+time-end = 08-28 11:31:09.175
+cpu-busy = false
+cpu-rate = 08-28 11:31:09.145 cpu:10% app:0% [user:6% system:3% ioWait:0% ]
+
+stack = 08-28 11:31:08.139
+
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+com.vip001.framemonitor.ExampleApdater.getView(ExampleApdater.java:33)
+android.widget.AbsListView.obtainView(AbsListView.java:2413)
+android.widget.ListView.makeAndAddView(ListView.java:1986)
+android.widget.ListView.fillDown(ListView.java:709)
+android.widget.ListView.fillGap(ListView.java:673)
+android.widget.AbsListView.trackMotionScroll(AbsListView.java:5471)
+android.widget.ListView.trackMotionScroll(ListView.java:1894)
+android.widget.AbsListView$FlingRunnable.run(AbsListView.java:5007)
+android.view.Choreographer$CallbackRecord.run(Choreographer.java:933)
+android.view.Choreographer.doCallbacks(Choreographer.java:742)
+android.view.Choreographer.doFrame(Choreographer.java:671)
+android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:919)
+android.os.Handler.handleCallback(Handler.java:761)
+android.os.Handler.dispatchMessage(Handler.java:98)
+android.os.Looper.loop(Looper.java:156)
+android.app.ActivityThread.main(ActivityThread.java:6595)
+java.lang.reflect.Method.invoke(Native Method)
+com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)
+com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)
+
+08-28 11:31:09.141
+
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+com.vip001.framemonitor.ExampleApdater.getView(ExampleApdater.java:33)
+android.widget.AbsListView.obtainView(AbsListView.java:2413)
+android.widget.ListView.makeAndAddView(ListView.java:1986)
+android.widget.ListView.fillDown(ListView.java:709)
+android.widget.ListView.fillGap(ListView.java:673)
+android.widget.AbsListView.trackMotionScroll(AbsListView.java:5471)
+android.widget.ListView.trackMotionScroll(ListView.java:1894)
+android.widget.AbsListView$FlingRunnable.run(AbsListView.java:5007)
+android.view.Choreographer$CallbackRecord.run(Choreographer.java:933)
+android.view.Choreographer.doCallbacks(Choreographer.java:742)
+android.view.Choreographer.doFrame(Choreographer.java:671)
+android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:919)
+android.os.Handler.handleCallback(Handler.java:761)
+android.os.Handler.dispatchMessage(Handler.java:98)
+android.os.Looper.loop(Looper.java:156)
+android.app.ActivityThread.main(ActivityThread.java:6595)
+java.lang.reflect.Method.invoke(Native Method)
+com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)
+com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)
+
+
+

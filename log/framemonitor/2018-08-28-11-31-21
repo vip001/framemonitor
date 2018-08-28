@@ -1,0 +1,149 @@
+
+--------MainThread Message--------
+
+FrameMonitorLooper (main, tid 1) {63fcec9}
+FrameMonitor  Message 0: { when=-6ms barrier=380 }
+FrameMonitor  (Total messages: 1, polling=false, quitting=false)
+
+--------MainThread Stack Before JANK--------
+
+2018-08-28 11:31:21.709
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+com.vip001.framemonitor.Example2Activity$2.onAnimationUpdate(Example2Activity.java:46)
+android.animation.ValueAnimator.animateValue(ValueAnimator.java:1346)
+android.animation.ValueAnimator.animateBasedOnTime(ValueAnimator.java:1258)
+android.animation.ValueAnimator.doAnimationFrame(ValueAnimator.java:1306)
+android.animation.AnimationHandler.doAnimationFrame(AnimationHandler.java:146)
+android.animation.AnimationHandler.-wrap2(AnimationHandler.java)
+android.animation.AnimationHandler$1.doFrame(AnimationHandler.java:54)
+android.view.Choreographer$CallbackRecord.run(Choreographer.java:931)
+android.view.Choreographer.doCallbacks(Choreographer.java:742)
+android.view.Choreographer.doFrame(Choreographer.java:671)
+android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:919)
+android.os.Handler.handleCallback(Handler.java:761)
+android.os.Handler.dispatchMessage(Handler.java:98)
+android.os.Looper.loop(Looper.java:156)
+android.app.ActivityThread.main(ActivityThread.java:6595)
+java.lang.reflect.Method.invoke(Native Method)
+com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)
+com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)
+
+2018-08-28 11:31:21.609
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+com.vip001.framemonitor.Example2Activity$2.onAnimationUpdate(Example2Activity.java:46)
+android.animation.ValueAnimator.animateValue(ValueAnimator.java:1346)
+android.animation.ValueAnimator.animateBasedOnTime(ValueAnimator.java:1258)
+android.animation.ValueAnimator.doAnimationFrame(ValueAnimator.java:1306)
+android.animation.AnimationHandler.doAnimationFrame(AnimationHandler.java:146)
+android.animation.AnimationHandler.-wrap2(AnimationHandler.java)
+android.animation.AnimationHandler$1.doFrame(AnimationHandler.java:54)
+android.view.Choreographer$CallbackRecord.run(Choreographer.java:931)
+android.view.Choreographer.doCallbacks(Choreographer.java:742)
+android.view.Choreographer.doFrame(Choreographer.java:671)
+android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:919)
+android.os.Handler.handleCallback(Handler.java:761)
+android.os.Handler.dispatchMessage(Handler.java:98)
+android.os.Looper.loop(Looper.java:156)
+android.app.ActivityThread.main(ActivityThread.java:6595)
+java.lang.reflect.Method.invoke(Native Method)
+com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)
+com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)
+
+2018-08-28 11:31:21.509
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+com.vip001.framemonitor.Example2Activity$2.onAnimationUpdate(Example2Activity.java:46)
+android.animation.ValueAnimator.animateValue(ValueAnimator.java:1346)
+android.animation.ValueAnimator.animateBasedOnTime(ValueAnimator.java:1258)
+android.animation.ValueAnimator.doAnimationFrame(ValueAnimator.java:1306)
+android.animation.AnimationHandler.doAnimationFrame(AnimationHandler.java:146)
+android.animation.AnimationHandler.-wrap2(AnimationHandler.java)
+android.animation.AnimationHandler$1.doFrame(AnimationHandler.java:54)
+android.view.Choreographer$CallbackRecord.run(Choreographer.java:931)
+android.view.Choreographer.doCallbacks(Choreographer.java:742)
+android.view.Choreographer.doFrame(Choreographer.java:671)
+android.view.Choreographer$FrameDisplayEventReceiver.run(Choreographer.java:919)
+android.os.Handler.handleCallback(Handler.java:761)
+android.os.Handler.dispatchMessage(Handler.java:98)
+android.os.Looper.loop(Looper.java:156)
+android.app.ActivityThread.main(ActivityThread.java:6595)
+java.lang.reflect.Method.invoke(Native Method)
+com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:942)
+com.android.internal.os.ZygoteInit.main(ZygoteInit.java:832)
+
+--------Thread Stack--------
+
+Thread[HeapTaskDaemon,5,system]
+
+dalvik.system.VMRuntime.runHeapTasks(Native Method)
+java.lang.Daemons$HeapTaskDaemon.run(Daemons.java:433)
+java.lang.Thread.run(Thread.java:776)
+
+Thread[FinalizerWatchdogDaemon,5,system]
+
+java.lang.Thread.sleep(Native Method)
+java.lang.Thread.sleep(Thread.java:379)
+java.lang.Thread.sleep(Thread.java:321)
+java.lang.Daemons$FinalizerWatchdogDaemon.sleepFor(Daemons.java:314)
+java.lang.Daemons$FinalizerWatchdogDaemon.waitForFinalization(Daemons.java:336)
+java.lang.Daemons$FinalizerWatchdogDaemon.run(Daemons.java:253)
+java.lang.Thread.run(Thread.java:776)
+
+Thread[FinalizerDaemon,5,system]
+
+java.lang.Object.wait(Native Method)
+java.lang.Object.wait(Object.java:407)
+java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:188)
+java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:209)
+java.lang.Daemons$FinalizerDaemon.run(Daemons.java:204)
+java.lang.Thread.run(Thread.java:776)
+
+Thread[ReferenceQueueDaemon,5,system]
+
+java.lang.Object.wait(Native Method)
+java.lang.Daemons$ReferenceQueueDaemon.run(Daemons.java:150)
+java.lang.Thread.run(Thread.java:776)
+
+Thread[BlockCanary-File-IO,5,main]
+
+java.lang.Object.wait(Native Method)
+java.lang.Thread.parkFor$(Thread.java:2142)
+sun.misc.Unsafe.park(Unsafe.java:325)
+java.util.concurrent.locks.LockSupport.park(LockSupport.java:161)
+java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.await(AbstractQueuedSynchronizer.java:2035)
+java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:413)
+java.util.concurrent.ThreadPoolExecutor.getTask(ThreadPoolExecutor.java:1058)
+java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1118)
+java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+java.lang.Thread.run(Thread.java:776)
+
+Thread[BlockCanary-loop,5,main]
+
+android.os.MessageQueue.nativePollOnce(Native Method)
+android.os.MessageQueue.next(MessageQueue.java:356)
+android.os.Looper.loop(Looper.java:138)
+android.os.HandlerThread.run(HandlerThread.java:61)
+
+Thread[BlockCanary-writer,5,main]
+
+android.os.MessageQueue.nativePollOnce(Native Method)
+android.os.MessageQueue.next(MessageQueue.java:356)
+android.os.Looper.loop(Looper.java:138)
+android.os.HandlerThread.run(HandlerThread.java:61)
+
+Thread[LogThread,5,main]
+
+dalvik.system.VMStack.getThreadStackTrace(Native Method)
+java.lang.Thread.getStackTrace(Thread.java:1581)
+java.lang.Thread.getAllStackTraces(Thread.java:1631)
+com.vip001.monitor.log.LogThread.doLog(LogThread.java:107)
+com.vip001.monitor.log.LogThread.handleMessage(LogThread.java:133)
+android.os.Handler.dispatchMessage(Handler.java:101)
+android.os.Looper.loop(Looper.java:156)
+android.os.HandlerThread.run(HandlerThread.java:61)
+
