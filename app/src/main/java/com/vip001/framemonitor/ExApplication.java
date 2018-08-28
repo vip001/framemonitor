@@ -2,6 +2,8 @@ package com.vip001.framemonitor;
 
 import android.app.Application;
 
+import com.github.moduth.blockcanary.BlockCanary;
+import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.vip001.monitor.FrameMonitorManager;
 
 /**
@@ -12,5 +14,11 @@ public class ExApplication extends Application {
     public void onCreate() {
         super.onCreate();
         FrameMonitorManager.getInstance().init(this).start();
+        BlockCanary.install(this,new BlockCanaryContext(){
+            @Override
+            public boolean stopWhenDebugging() {
+                return false;
+            }
+        }).start();
     }
 }
