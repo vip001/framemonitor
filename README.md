@@ -84,6 +84,12 @@ public class BaseActivity extends Activity {
  Android屏幕设备的刷新频率为60Hz,通过做一道小学计算题 1÷60≈16.67 (ms)得到16ms
 </p>
 <p style="text-indent:2em"> 
+<b>framemonitor与blockcanary对比</b>
+</p>
+<hr/>
+<p style="text-indent:2em">
+https://www.jianshu.com/p/1b0e4d79f511
+</p>
 <b>后续优化</b>
 </p>
 <hr/>
