@@ -1,7 +1,0 @@
-
-def versions = [:]
-versions.version = "1.0.3"
-
-allprojects {
-    version = versions.version
-}

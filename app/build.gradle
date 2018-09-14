@@ -5,7 +5,7 @@ android {
     defaultConfig {
         applicationId "com.vip001.framemonitor"
         minSdkVersion 16
-        targetSdkVersion 19
+        targetSdkVersion 27
         versionCode 1
 
     }
@@ -21,8 +21,4 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     debugImplementation project(':framemonitor-android')
     releaseImplementation project(':framemonitor-android-no-op')
-
-    debugImplementation 'com.github.markzhai:blockcanary-android:1.5.0'
-    releaseImplementation 'com.github.markzhai:blockcanary-no-op:1.5.0'
-
 }

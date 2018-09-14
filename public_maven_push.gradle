@@ -1,0 +1,26 @@
+apply plugin: 'com.novoda.bintray-release'
+this.tasks.whenTaskAdded {
+    if(it.name.equals("bintrayUpload")){
+        it.dependsOn "assembleRelease"
+    }
+}
+ext.defineMavenPubish = this.&_defineMavenPubish
+def _defineMavenPubish(String artifactName){
+
+    publish {
+        userOrg = 'vip001'//bintray用户名
+        repoName = 'framemonitor'//要传到的maven的名字。你可能有多个maven，要传哪个写哪个。
+        groupId = this.group//jcenter上的路径
+        artifactId = artifactName//项目名称
+        publishVersion =this.version//版本号
+        desc = 'FrameMonitor framemonitor AndroidPerformanceMonitor'//描述，不重要
+        website = 'https://github.com/vip001/framemonitor'//网站，不重要；尽量模拟github上的地址
+    }
+    java.util.Properties map=  new Properties();
+    InputStream stream= new FileInputStream("D:\\privatekey\\key.properties")
+    map.load(stream)
+    stream.close()
+    ext.bintrayUser=map.getProperty("bintrayUser")
+    ext.bintrayKey=map.getProperty("bintrayKey")
+}
+

@@ -20,9 +20,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    lintOptions {
+        abortOnError false
+    }
 }
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
    if(findProject(':framemonitor-android-common')!=null) api project(':framemonitor-android-common')
+    else api "${this.group}:${commonArtifact}:${version}"
 }
+apply from: '../public_maven_push.gradle'
+ext.defineMavenPubish("${releaseArtifact}")
