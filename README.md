@@ -18,7 +18,7 @@ FrameMonitor 相当于SDK版的Systrace,可以监控App的帧率，接入后可�
 </p>
 <p style="text-indent:2em">
 日志的保存目录：优先SD卡目录（/mnt/sdcard/Android/data/【packagename】/cache/framemonitor/<file>),
-再是手机内存(/data/data/cache/framemonitor)
+再是手机内存(/data/data/【packagename】/cache/framemonitor)
 </p>
 <p style="text-indent:2em">
 日志文件：文件名格式为"yyyy-MM-dd-HH-mm-ss"，内容格式如下：<br>
@@ -39,11 +39,24 @@ FrameMonitor 相当于SDK版的Systrace,可以监控App的帧率，接入后可�
 </code></pre>
 
 ## 接入说明
+<p style="text-indent:2em">在工程中先引入jcenter仓库</p>
+<pre><code>
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+</code></pre>
 <p style="text-indent:2em">在build.gradle文件中</p>
 <pre><code>
 dependencies {
-     debugImplementation project(':framemonitor-android')
-     releaseImplementation project(':framemonitor-android-no-op')
+     debugImplementation 'com.github.vip001:framemonitor-android:1.0.0'
+     releaseImplementation 'com.github.vip001:framemonitor-android-no-op:1.0.0'
 }
 </code></pre>
 <p style="text-indent:2em">在Application类中：</p>
