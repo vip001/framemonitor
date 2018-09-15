@@ -8,7 +8,7 @@
 
 ## 简述
 <p style="text-indent:2em">
-FrameMonitor 相当于SDK版的Systrace,可以监控App的帧率，接入后可以通过小圆球看到App的实时帧率，当发生严重掉帧，小圆球颜色变红，并且会保存日志到本地，以供分析
+FrameMonitor 相当于SDK版的Systrace,可以监控App的帧绘制时间，接入后可以通过小圆球看到App的实时帧绘制时间，当发生严重掉帧，小圆球颜色变红，并且会保存日志到本地，以供分析
 </p>
 <p style="text-indent:2em">
 小圆球上的数字代表当前帧耗费的时间，单位是ms
@@ -82,10 +82,10 @@ public class BaseActivity extends Activity {
 
 ## 版本历史
 ### 1.0
- 1. 帧率检测
+ 1. 帧绘制时间检测
  2. 小圆球悬浮窗显示（无需悬浮窗权限)
  3. 日志信息：发生卡顿时MainLooper的Message信息，线程调用的堆栈信息
- 4. 帧率检测开关控制和小圆球显示开关控制
+ 4. 帧绘制时间检测开关控制和小圆球显示开关控制
 
 
 ##  问题
@@ -102,10 +102,4 @@ public class BaseActivity extends Activity {
 <hr/>
 <p style="text-indent:2em">
 https://www.jianshu.com/p/1b0e4d79f511
-</p>
-<b>后续优化</b>
-</p>
-<hr/>
-<p style="text-indent:2em">
-log信息增加发生卡顿时的cpu信息，内存信息,GC耗时分析；demo做得更漂亮
 </p>
