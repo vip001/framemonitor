@@ -66,4 +66,9 @@ public class FrameMonitorManager implements IFrameMonitorManager {
     public IFrameMonitorManager stop() {
         return this;
     }
+
+    @Override
+    public IFrameMonitorManager setEnableBackgroundMonitor(boolean enableBackgroundMonitor) {
+        return this;
+    }
 }

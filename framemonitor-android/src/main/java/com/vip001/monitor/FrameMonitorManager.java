@@ -38,7 +38,7 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
 
     private LogThread mLogThread;
 
-
+    private boolean enableBackgroundMonitor;
     private IShowStatus mShowStatus;
 
     private FrameMonitorManager() {
@@ -157,6 +157,12 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
         return this;
     }
 
+    @Override
+    public IFrameMonitorManager setEnableBackgroundMonitor(boolean enableBackgroundMonitor) {
+        this.enableBackgroundMonitor = enableBackgroundMonitor;
+        return this;
+    }
+
     private void checkLogDir() {
         checkLogDir(new File(mApp.getExternalCacheDir(), DIR_LOG_CACHE), false);
     }
@@ -268,7 +274,7 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
     }
 
     private void onAppChangeToBackground() {
-        if (hasStart && FrameMonitor.getInstance().isStarted()) {
+        if (!enableBackgroundMonitor && hasStart && FrameMonitor.getInstance().isStarted()) {
             FrameMonitor.getInstance().stop();
         }
     }

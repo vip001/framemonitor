@@ -22,4 +22,6 @@ public interface IFrameMonitorManager {
     IFrameMonitorManager start();
 
     IFrameMonitorManager stop();
+
+    IFrameMonitorManager setEnableBackgroundMonitor(boolean enableBackgroundMonitor);
 }
