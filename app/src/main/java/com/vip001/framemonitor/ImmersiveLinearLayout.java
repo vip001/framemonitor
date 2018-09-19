@@ -9,6 +9,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.vip001.monitor.utils.DimentionUtils;
+
 /**
  * Created by xxd on 2018/7/19
  */
@@ -24,7 +26,7 @@ public class ImmersiveLinearLayout extends LinearLayout {
             Activity activity = (Activity) getContext();
             StatusBarUtils.setImmersiveStatusBar(activity);
             mStatusBar = new View(activity);
-            addView(mStatusBar, 0, new LayoutParams(LayoutParams.MATCH_PARENT, (int) getContext().getResources().getDisplayMetrics().density * 25));
+            addView(mStatusBar, 0, new LayoutParams(LayoutParams.MATCH_PARENT, DimentionUtils.getStatusBarHeight(context)));
         }
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ImmersiveLinearLayout);
         int color = typedArray.getColor(R.styleable.ImmersiveLinearLayout_statusbarcolor, Color.parseColor("#171220"));
