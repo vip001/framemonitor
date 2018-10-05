@@ -1,28 +1,31 @@
-package com.vip001.framemonitor;
+package com.vip001.framemonitor.exam;
 
-import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ListView;
 
-import com.vip001.monitor.FrameMonitorManager;
+import com.vip001.framemonitor.BaseActivity;
+import com.vip001.framemonitor.ExampleApdater;
+import com.vip001.framemonitor.JANKSwitch;
+import com.vip001.framemonitor.R;
+import com.vip001.monitor.core.FrameMonitorManager;
 
 /**
  * Created by xxd on 2018/8/14
  */
-public class Example2Activity extends BaseActivity {
-    private ImageView mImageView;
+public class Example1Activity extends BaseActivity {
     private Button mJANKBtn;
     private Button mStartBtn;
-    private ValueAnimator mValueAnimator;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam2);
-        mImageView = this.findViewById(R.id.imageView);
-        mStartBtn = this.findViewById(R.id.stop);
+        setContentView(R.layout.activity_list);
+        JANKSwitch.DEBUG_JANK = false;
+        mJANKBtn = (Button) this.findViewById(R.id.btn);
+        mStartBtn = (Button) this.findViewById(R.id.start);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,26 +37,8 @@ public class Example2Activity extends BaseActivity {
                 updateStartText();
             }
         });
-        mValueAnimator = ValueAnimator.ofFloat(0, 1);
-        mValueAnimator.setDuration(4000);
-        mValueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        mValueAnimator.setRepeatCount(-1);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if (JANKSwitch.DEBUG_JANK) {
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                mImageView.setImageAlpha((int) (255 * animation.getAnimatedFraction()));
-            }
-        });
-        mValueAnimator.start();
-        mJANKBtn = (Button) this.findViewById(R.id.btn);
-
+        mListView = (ListView) this.findViewById(R.id.list);
+        mListView.setAdapter(new ExampleApdater());
         mJANKBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,12 +48,6 @@ public class Example2Activity extends BaseActivity {
         });
         updateJANKText();
         updateStartText();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mValueAnimator.cancel();
     }
 
     private void updateJANKText() {

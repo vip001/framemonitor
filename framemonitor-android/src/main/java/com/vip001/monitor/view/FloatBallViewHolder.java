@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.vip001.monitor.FrameMonitorManager;
+import com.vip001.monitor.core.FrameMonitorManager;
 import com.vip001.monitor.R;
 import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.utils.FormatUtils;

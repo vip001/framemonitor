@@ -1,4 +1,4 @@
-package com.vip001.monitor;
+package com.vip001.monitor.core;
 
 import android.app.Activity;
 import android.app.Application;

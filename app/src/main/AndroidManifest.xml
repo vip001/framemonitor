@@ -17,7 +17,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Example1Activity"></activity>
-        <activity android:name=".Example2Activity"></activity>
+        <activity android:name=".exam.Example1Activity"></activity>
+        <activity android:name=".exam.Example2Activity"></activity>
+        <activity android:name=".exam.Example3Activity"></activity>
+
     </application>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>

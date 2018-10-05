@@ -3,7 +3,7 @@ package com.vip001.framemonitor;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.vip001.monitor.FrameMonitorManager;
+import com.vip001.monitor.core.FrameMonitorManager;
 
 /**
  * Created by xxd on 2018/8/14

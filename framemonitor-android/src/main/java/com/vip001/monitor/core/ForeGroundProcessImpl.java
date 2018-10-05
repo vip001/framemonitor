@@ -1,14 +1,17 @@
-package com.vip001.monitor;
+package com.vip001.monitor.core;
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.ComponentCallbacks;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
-import com.vip001.monitor.log.LogThread;
+import com.vip001.monitor.common.FileManager;
+import com.vip001.monitor.common.MsgDef;
+import com.vip001.monitor.services.IPCBinder;
+import com.vip001.monitor.services.stack.LogThread;
 import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.view.DisableShowStatus;
 import com.vip001.monitor.view.IShowStatus;
@@ -22,29 +25,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by xxd on 2018/8/7
+ * Created by xxd on 2018/9/20
  */
-public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, Application.ActivityLifecycleCallbacks, IFrameMonitorManager {
+class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.ActivityLifecycleCallbacks, IFrameMonitorManager {
     private Application mApp;
-    private static FrameMonitorManager sInstance = new FrameMonitorManager();
-    private static final String DIR_LOG_CACHE = "framemonitor";
-    private File mParentFile;
     private List<String> mReuestShowActities;
     private WeakReference<Activity> mCurrentActivity;
     private long mVisibleCount;
     private boolean mLastForeground = false;
     private boolean hasStart;
-    private static final String TAG = "FrameMonitor";
-
     private LogThread mLogThread;
 
     private boolean enableBackgroundMonitor;
     private IShowStatus mShowStatus;
+    private IPCBinder mBinder;
 
-    private FrameMonitorManager() {
+
+    ForeGroundProcessImpl() {
         mReuestShowActities = new ArrayList<>();
         //default enableshow
         setEnableShow(true);
+        mBinder = new IPCBinder();
     }
 
     @Override
@@ -54,13 +55,13 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
 
     @Override
     public IFrameMonitorManager setConfig(IConfig config) {
-        FrameMonitorConfig.getInstance().setConfig(config);
+        FrameCoreConfig.getInstance().setConfig(config);
         return this;
     }
 
     @Override
     public IConfig getConfig() {
-        return FrameMonitorConfig.getInstance().getConfig();
+        return FrameCoreConfig.getInstance().getConfig();
     }
 
     @Override
@@ -81,10 +82,12 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
 
             }
         });
+        FileManager.getInstance().init(application);
         DisplayMetrics metrics = application.getResources().getDisplayMetrics();
         DimentionUtils.SCREEN_WIDTH = metrics.widthPixels;
         DimentionUtils.SCREEN_HEIGHT = metrics.heightPixels;
-        checkLogDir();
+        FileManager.getInstance().checkLogDir();
+        mBinder.connect(application);
         return this;
     }
 
@@ -124,11 +127,12 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
             }
             mLogThread = null;
         }
-        if (mParentFile != null) {
-            mLogThread = new LogThread(mParentFile);
+        File parentFile = FileManager.getInstance().checkLogDir();
+        if (parentFile != null) {
+            mLogThread = new LogThread(parentFile);
             mLogThread.start();
         }
-        FrameMonitor.getInstance().start().registerCallback(this);
+        FrameCore.getInstance().start().registerCallback(this);
         if (mShowStatus != null && mShowStatus instanceof ShowStatus) {
             mShowStatus.init(mReuestShowActities, mCurrentActivity);
         }
@@ -150,7 +154,7 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
             mLogThread = null;
         }
         //ui
-        FrameMonitor.getInstance().stop().unregisterCallback(this);
+        FrameCore.getInstance().stop().unregisterCallback(this);
         setEnableShow(false);
         //flag
         hasStart = false;
@@ -163,29 +167,18 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
         return this;
     }
 
-    private void checkLogDir() {
-        checkLogDir(new File(mApp.getExternalCacheDir(), DIR_LOG_CACHE), false);
+    @Override
+    public boolean startFlowCal() {
+        Message msg = Message.obtain();
+        msg.what = MsgDef.MSG_START_FLOW;
+        return mBinder.sendMessage(msg);
     }
 
-    private void checkLogDir(File file, boolean stop) {
-        if (stop) {
-            return;
-        }
-        if (!file.exists()) {
-            if (file.mkdirs()) {
-                mParentFile = file;
-                Log.i(TAG, "FrameMonitor log path=" + mParentFile.getAbsolutePath());
-            } else {
-                checkLogDir(new File(mApp.getCacheDir(), DIR_LOG_CACHE), true);
-            }
-        } else {
-            mParentFile = file;
-            Log.i(TAG, "FrameMonitor log path=" + mParentFile.getAbsolutePath());
-        }
-    }
-
-    public static FrameMonitorManager getInstance() {
-        return sInstance;
+    @Override
+    public boolean stopFlowCal() {
+        Message msg = Message.obtain();
+        msg.what = MsgDef.MSG_END_FLOW;
+        return mBinder.sendMessage(msg);
     }
 
     @Override
@@ -206,7 +199,7 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
 
     @Override
     public void update(long ns) {
-        if (FrameMonitorConfig.getInstance().sortTime(ns) == IConfig.RESULT_RED && mLogThread != null) {
+        if (FrameCoreConfig.getInstance().sortTime(ns) == IConfig.RESULT_RED && mLogThread != null) {
             mLogThread.writeLog();
         }
         if (canExecStatus()) {
@@ -274,14 +267,14 @@ public class FrameMonitorManager implements FrameMonitor.FrameMonitorCallback, A
     }
 
     private void onAppChangeToBackground() {
-        if (!enableBackgroundMonitor && hasStart && FrameMonitor.getInstance().isStarted()) {
-            FrameMonitor.getInstance().stop();
+        if (!enableBackgroundMonitor && hasStart && FrameCore.getInstance().isStarted()) {
+            FrameCore.getInstance().stop();
         }
     }
 
     private void onAppChangeToForeGround() {
-        if (hasStart && !FrameMonitor.getInstance().isStarted()) {
-            FrameMonitor.getInstance().start();
+        if (hasStart && !FrameCore.getInstance().isStarted()) {
+            FrameCore.getInstance().start();
         }
     }
 

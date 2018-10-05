@@ -1,4 +1,4 @@
-package com.vip001.monitor;
+package com.vip001.monitor.core;
 
 import android.view.Choreographer;
 
@@ -7,28 +7,28 @@ import com.vip001.monitor.utils.CallbackManager;
 /**
  * Created by xxd on 2018/8/6
  */
-class FrameMonitor implements Choreographer.FrameCallback, CallbackManager.TraversalCallback<FrameMonitor.FrameMonitorCallback> {
+class FrameCore implements Choreographer.FrameCallback, CallbackManager.TraversalCallback<FrameCore.FrameCoreCallback> {
     private boolean hasStarted;
-    private CallbackManager<FrameMonitorCallback> mCallbackManager;
-    private static final FrameMonitor sInstance = new FrameMonitor();
+    private CallbackManager<FrameCoreCallback> mCallbackManager;
+    private static final FrameCore sInstance = new FrameCore();
     private long mLastFrameNanoTime;
     private long mFrameInterval;
 
-    public static FrameMonitor getInstance() {
+    public static FrameCore getInstance() {
         return sInstance;
     }
 
-    private FrameMonitor() {
+    private FrameCore() {
         hasStarted = false;
         mCallbackManager = new CallbackManager<>();
     }
 
-    public FrameMonitor registerCallback(FrameMonitorCallback callback) {
+    public FrameCore registerCallback(FrameCoreCallback callback) {
         mCallbackManager.addCallback(callback);
         return this;
     }
 
-    public FrameMonitor unregisterCallback(FrameMonitorCallback callback) {
+    public FrameCore unregisterCallback(FrameCoreCallback callback) {
         mCallbackManager.removeCallback(callback);
         return this;
     }
@@ -37,13 +37,13 @@ class FrameMonitor implements Choreographer.FrameCallback, CallbackManager.Trave
         return hasStarted;
     }
 
-    public FrameMonitor start() {
+    public FrameCore start() {
         Choreographer.getInstance().postFrameCallback(this);
         hasStarted = true;
         return this;
     }
 
-    public FrameMonitor stop() {
+    public FrameCore stop() {
         hasStarted = false;
         return this;
     }
@@ -65,11 +65,11 @@ class FrameMonitor implements Choreographer.FrameCallback, CallbackManager.Trave
     }
 
     @Override
-    public void execute(FrameMonitorCallback callback) {
+    public void execute(FrameCoreCallback callback) {
         callback.update(mFrameInterval);
     }
 
-    public interface FrameMonitorCallback {
+    public interface FrameCoreCallback {
         void update(long ns);
     }
 }

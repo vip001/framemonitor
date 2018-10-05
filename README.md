@@ -17,8 +17,8 @@ FrameMonitor 相当于SDK版的Systrace,可以监控App的帧绘制时间，接�
 小圆球的颜色：绿色-流畅；黄色-可以接收的掉帧；红色-严重掉帧，默认:绿色 -(<=16ms)，黄色-(16-32ms)，红色(>32ms)，与Systrace的绿黄红定义保持一致；实际测试中由于机器性能差异同一份代码在不同机器上跑出来的帧绘制时间可能最高相差16ms，所以提供IConfig接口来定义掉帧的严重程度，使帧绘制时间可以反映主观上的卡顿
 </p>
 <p style="text-indent:2em">
-日志的保存目录：优先SD卡目录（/mnt/sdcard/Android/data/【packagename】/cache/framemonitor/<file>),
-再是手机内存(/data/data/【packagename】/cache/framemonitor)
+日志的保存目录：优先SD卡目录（/mnt/sdcard/Android/data/【packagename】/cache/framemonitor/log),
+再是手机内存(/data/data/【packagename】/cache/framemonitor/log)
 </p>
 <p style="text-indent:2em">
 日志文件：文件名格式为"yyyy-MM-dd-HH-mm-ss"，内容格式如下：<br>

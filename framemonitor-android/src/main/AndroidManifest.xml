@@ -1,1 +1,10 @@
-<manifest package="com.vip001.monitor" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.vip001.monitor">
+
+    <application>
+        <service
+            android:name="com.vip001.monitor.services.RemoteBackgroundService"
+            android:process=":remote"></service>
+    </application>
+
+</manifest>

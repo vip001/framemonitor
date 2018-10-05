@@ -12,31 +12,30 @@
         android:layout_height="48dp"
         android:background="#171220"
         android:gravity="center"
-        android:text="Example"
+        android:text="属性动画卡顿"
         android:textColor="#fff"
         android:textSize="17dp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/exam1"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="列表滑动卡顿"
-        android:textSize="15dp" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_launcher"></ImageView>
 
     <Button
-        android:id="@+id/exam2"
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="属性动画卡顿"
-        android:textSize="15dp" />
+        android:layout_marginTop="15dp"
+        android:text="开启掉帧" />
     <Button
-        android:id="@+id/exam3"
+        android:id="@+id/stop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:text="流量统计"
-        android:textSize="15dp" />
+        android:layout_marginTop="15dp"
+        android:text="停止检测" />
+
 </com.vip001.framemonitor.ImmersiveLinearLayout>
