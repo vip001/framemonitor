@@ -103,3 +103,9 @@ public class BaseActivity extends Activity {
 <p style="text-indent:2em">
 https://www.jianshu.com/p/1b0e4d79f511
 </p>
+<b>framemonitor原理分析</b>
+</p>
+<hr/>
+<p style="text-indent:2em">
+https://www.jianshu.com/p/9f200016d309
+</p>
