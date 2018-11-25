@@ -3,6 +3,7 @@ package com.vip001.monitor.services.stack;
 import android.os.Handler;
 import android.os.Looper;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 
 /**
@@ -10,6 +11,17 @@ import java.util.LinkedList;
  */
 public class MainStackCollectTask implements Runnable {
 
+    private static final HashSet<String> sFilterStack;
+
+    static {
+        sFilterStack = new HashSet<String>();
+        sFilterStack.add("android.os.Parcel.nativeWriteInterfaceToken(Native Method)");
+        sFilterStack.add("android.os.BinderProxy.transactNative(Native Method)");
+        sFilterStack.add("android.os.MessageQueue.nativePollOnce(Native Method)");
+        sFilterStack.add("android.view.Surface.nativeAllocateBuffers(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nInitialize(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nSyncAndDrawFrame(Native Method)");
+    }
 
     private Handler mLaucherHandler;
     private long mLastDumpTime;
@@ -54,17 +66,18 @@ public class MainStackCollectTask implements Runnable {
         long currentTime = System.currentTimeMillis();
         long interval = currentTime - mLastDumpTime;
         if (interval >= INTERVAL_COLLECT) {
-            StringBuilder builder = new StringBuilder();
             StackTraceElement[] elements = Looper.getMainLooper().getThread().getStackTrace();
-            for (int i = 0, len = elements.length; i < len; i++) {
-                if (i != 0) {
-                    builder.append("\r\n");
+            if (!sFilterStack.contains(elements[0].toString())) {
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0, len = elements.length; i < len; i++) {
+                    if (i != 0) {
+                        builder.append("\r\n");
+                    }
+                    builder.append(elements[i].toString());
                 }
-                builder.append(elements[i].toString());
-            }
-            if (mStacks.size() > 10) {
-                mStacks.removeFirst();
-            } else {
+                if (mStacks.size() > 5) {
+                    mStacks.removeFirst();
+                }
                 mStacks.addLast(new StackInfo(builder.toString(), currentTime));
             }
             mLastDumpTime = currentTime;

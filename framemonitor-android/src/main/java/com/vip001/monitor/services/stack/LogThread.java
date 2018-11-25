@@ -66,29 +66,25 @@ public class LogThread extends HandlerThread implements Handler.Callback {
     private void doLog() {
         isWrite = true;
         try {
+            LinkedList<StackInfo> stackInfos = mMainStackCollectTask.getStacks();
+            if (stackInfos.size() <= 0) {
+                return;
+            }
+            StackInfo info = stackInfos.get(stackInfos.size() - 1);
+            if (System.currentTimeMillis() - info.time > 100) {
+                Log.i(TAG, "abort write stacks!invalid dropframes!");
+                return;
+            }
             File file = new File(mParentFile, FormatUtils.formatDate(new Date()));
             if (!file.exists()) {
                 file.createNewFile();
             }
+
             final PrintWriter printer = new PrintWriter(new FileOutputStream(file), true);
-
-            printer.println();
-            printer.println("--------MainThread Message--------");
-            printer.println();
-
-            Looper.getMainLooper().dump(new Printer() {
-                @Override
-                public void println(String x) {
-                    printer.println(x);
-                }
-            }, TAG);
 
             printer.println();
             printer.println("--------MainThread Stack Before JANK--------");
 
-
-            LinkedList<StackInfo> stackInfos = mMainStackCollectTask.getStacks();
-            StackInfo info = null;
 
             for (int i = stackInfos.size() - 1, count = 1; i > 0; i--) {
                 if (count > 3) {
@@ -100,6 +96,17 @@ public class LogThread extends HandlerThread implements Handler.Callback {
                 printer.println(info.msg);
                 count++;
             }
+
+            printer.println();
+            printer.println("--------MainThread Message--------");
+            printer.println();
+
+            Looper.getMainLooper().dump(new Printer() {
+                @Override
+                public void println(String x) {
+                    printer.println(x);
+                }
+            }, TAG);
 
             printer.println();
             printer.println("--------Thread Stack--------");

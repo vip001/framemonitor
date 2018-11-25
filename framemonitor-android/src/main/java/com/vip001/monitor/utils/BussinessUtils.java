@@ -5,6 +5,12 @@ package com.vip001.monitor.utils;
  */
 
 public class BussinessUtils {
+    private static final String[] sFilterStr = new String[]{
+            "android.os.Parcel.nativeWriteInterfaceToken(Native Method)",
+            "android.os.MessageQueue.nativePollOnce(Native Method)",
+            "android.view.ThreadedRenderer.nInitialize(Native Method)"
+    };
+
     public static String getTitle() {
         String.format("Thread.");
         return null;

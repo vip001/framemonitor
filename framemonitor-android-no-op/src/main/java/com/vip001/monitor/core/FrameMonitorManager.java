@@ -71,4 +71,14 @@ public class FrameMonitorManager implements IFrameMonitorManager {
     public IFrameMonitorManager setEnableBackgroundMonitor(boolean enableBackgroundMonitor) {
         return this;
     }
+
+    @Override
+    public boolean startFlowCal() {
+        return false;
+    }
+
+    @Override
+    public boolean stopFlowCal() {
+        return false;
+    }
 }

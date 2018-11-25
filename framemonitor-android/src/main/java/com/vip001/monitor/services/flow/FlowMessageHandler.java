@@ -1,7 +1,6 @@
 package com.vip001.monitor.services.flow;
 
 import android.os.Message;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.vip001.monitor.common.MsgDef;
@@ -33,8 +32,7 @@ public class FlowMessageHandler implements IMessageHandler {
             case MsgDef.MSG_END_FLOW:
                 String text = mCaculater.end();
                 mTask.setText(text);
-                Log.i("xxd","endflow="+text);
-               ThreadUtils.getInstance().execute(mTask);
+                ThreadUtils.getInstance().execute(mTask);
                 Toast.makeText(env.applicationContext, text, Toast.LENGTH_LONG).show();
                 result = true;
                 break;
