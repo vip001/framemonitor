@@ -1,7 +1,6 @@
 package com.vip001.framemonitor.exam;
 
 import android.os.Bundle;
-import android.os.Message;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -9,7 +8,6 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 
 import com.vip001.framemonitor.BaseActivity;
-import com.vip001.framemonitor.JANKSwitch;
 import com.vip001.framemonitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
 

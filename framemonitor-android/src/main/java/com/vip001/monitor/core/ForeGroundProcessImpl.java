@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Message;
 import android.util.DisplayMetrics;
 
+import com.vip001.framemonitor.IConfig;
+import com.vip001.framemonitor.IFrameMonitorManager;
 import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
 import com.vip001.monitor.services.IPCBinder;
@@ -16,8 +18,6 @@ import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.view.DisableShowStatus;
 import com.vip001.monitor.view.IShowStatus;
 import com.vip001.monitor.view.ShowStatus;
-import com.vip001.framemonitor.IConfig;
-import com.vip001.framemonitor.IFrameMonitorManager;
 
 import java.io.File;
 import java.lang.ref.WeakReference;

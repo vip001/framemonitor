@@ -26,7 +26,6 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.View;
 
-
 import com.vip001.monitor.R;
 
 import static android.graphics.Bitmap.Config.ARGB_8888;

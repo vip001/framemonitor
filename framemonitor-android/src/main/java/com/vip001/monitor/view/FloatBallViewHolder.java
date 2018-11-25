@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.vip001.monitor.core.FrameMonitorManager;
+import com.vip001.framemonitor.IConfig;
 import com.vip001.monitor.R;
+import com.vip001.monitor.core.FrameMonitorManager;
 import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.utils.FormatUtils;
 import com.vip001.monitor.view.snackbar.SnackbarBaseViewHolder;
-import com.vip001.framemonitor.IConfig;
 
 /**
  * Created by xxd on 2018/8/7
