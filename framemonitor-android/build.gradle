@@ -6,7 +6,7 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -26,9 +26,10 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    if(findProject(':framemonitor-android-common')!=null) api project(':framemonitor-android-common')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    if (findProject(':framemonitor-android-common') != null) api project(':framemonitor-android-common')
     else api "${this.group}:${commonArtifact}:${version}"
+    implementation 'com.android.support:recyclerview-v7:27.0.0'
 }
 apply from: '../public_maven_push.gradle'
 ext.defineMavenPubish("${debugArtifact}")

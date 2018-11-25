@@ -13,7 +13,7 @@ import com.vip001.monitor.R;
 import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.utils.FormatUtils;
 import com.vip001.monitor.view.snackbar.SnackbarBaseViewHolder;
-import com.vip1002.framemonitor.IConfig;
+import com.vip001.framemonitor.IConfig;
 
 /**
  * Created by xxd on 2018/8/7

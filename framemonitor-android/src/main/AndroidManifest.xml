@@ -5,6 +5,25 @@
         <service
             android:name="com.vip001.monitor.services.RemoteBackgroundService"
             android:process=":remote"></service>
+
+        <activity
+            android:name="com.vip001.monitor.activity.DropFramesDetailActivity"
+            android:process=":remote"
+            android:taskAffinity="com.vip001.monitor.${applicationId}">
+
+        </activity>
+        <activity
+            android:name="com.vip001.monitor.activity.DisplayDropFramesActivity"
+            android:icon="@mipmap/monitor_ic_launcher"
+            android:label="dropframes"
+            android:launchMode="singleTask"
+            android:process=":remote"
+            android:taskAffinity="com.vip001.monitor.${applicationId}">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

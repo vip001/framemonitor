@@ -16,8 +16,8 @@ import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.view.DisableShowStatus;
 import com.vip001.monitor.view.IShowStatus;
 import com.vip001.monitor.view.ShowStatus;
-import com.vip1002.framemonitor.IConfig;
-import com.vip1002.framemonitor.IFrameMonitorManager;
+import com.vip001.framemonitor.IConfig;
+import com.vip001.framemonitor.IFrameMonitorManager;
 
 import java.io.File;
 import java.lang.ref.WeakReference;

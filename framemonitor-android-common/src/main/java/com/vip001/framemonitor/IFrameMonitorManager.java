@@ -1,4 +1,4 @@
-package com.vip1002.framemonitor;
+package com.vip001.framemonitor;
 
 import android.app.Activity;
 import android.app.Application;

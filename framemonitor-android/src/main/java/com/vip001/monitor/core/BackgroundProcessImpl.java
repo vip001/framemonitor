@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.vip001.monitor.common.FileManager;
-import com.vip1002.framemonitor.IConfig;
-import com.vip1002.framemonitor.IFrameMonitorManager;
+import com.vip001.framemonitor.IConfig;
+import com.vip001.framemonitor.IFrameMonitorManager;
 
 /**
  * Created by xxd on 2018/9/20

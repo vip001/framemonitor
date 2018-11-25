@@ -1,6 +1,6 @@
 package com.vip001.monitor.core;
 
-import com.vip1002.framemonitor.IConfig;
+import com.vip001.framemonitor.IConfig;
 
 /**
  * Created by xxd on 2018/8/20

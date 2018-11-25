@@ -7,6 +7,8 @@ import android.view.View;
 import com.vip001.framemonitor.exam.Example1Activity;
 import com.vip001.framemonitor.exam.Example2Activity;
 import com.vip001.framemonitor.exam.Example3Activity;
+import com.vip001.monitor.activity.DisplayDropFramesActivity;
+import com.vip001.monitor.activity.DropFramesDetailActivity;
 
 public class MainActivity extends BaseActivity {
 
