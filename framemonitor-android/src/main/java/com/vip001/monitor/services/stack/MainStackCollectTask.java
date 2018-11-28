@@ -2,6 +2,7 @@ package com.vip001.monitor.services.stack;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -21,6 +22,10 @@ public class MainStackCollectTask implements Runnable {
         sFilterStack.add("android.view.Surface.nativeAllocateBuffers(Native Method)");
         sFilterStack.add("android.view.ThreadedRenderer.nInitialize(Native Method)");
         sFilterStack.add("android.view.ThreadedRenderer.nSyncAndDrawFrame(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nLoadSystemProperties(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nFence(Native Method)");
+        sFilterStack.add("android.view.GraphicBuffer.nReadGraphicBufferFromParcel(Native Method)");
+        sFilterStack.add("android.os.BinderProxy.transact(Native Method)");
     }
 
     private Handler mLaucherHandler;
@@ -67,6 +72,7 @@ public class MainStackCollectTask implements Runnable {
         long interval = currentTime - mLastDumpTime;
         if (interval >= INTERVAL_COLLECT) {
             StackTraceElement[] elements = Looper.getMainLooper().getThread().getStackTrace();
+            Log.i("xxd", "elements[0] str=" + elements[0]);
             if (!sFilterStack.contains(elements[0].toString())) {
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0, len = elements.length; i < len; i++) {

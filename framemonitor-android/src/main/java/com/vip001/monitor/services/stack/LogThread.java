@@ -6,7 +6,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.Printer;
-
 import com.vip001.monitor.utils.FormatUtils;
 
 import java.io.File;
@@ -63,15 +62,24 @@ public class LogThread extends HandlerThread implements Handler.Callback {
         }
     }
 
+    private boolean canDoLog() {
+        if (mMainStackCollectTask.getStacks().size() < 3) {
+            return false;
+        }
+        StackInfo info = mMainStackCollectTask.getStacks().get(mMainStackCollectTask.getStacks().size() - 1);
+
+        if (System.currentTimeMillis() - info.time > 100) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     private void doLog() {
         isWrite = true;
         try {
-            LinkedList<StackInfo> stackInfos = mMainStackCollectTask.getStacks();
-            if (stackInfos.size() <= 0) {
-                return;
-            }
-            StackInfo info = stackInfos.get(stackInfos.size() - 1);
-            if (System.currentTimeMillis() - info.time > 100) {
+
+            if (!canDoLog()) {
                 Log.i(TAG, "abort write stacks!invalid dropframes!");
                 return;
             }
@@ -85,7 +93,8 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             printer.println();
             printer.println("--------MainThread Stack Before JANK--------");
 
-
+            LinkedList<StackInfo> stackInfos = mMainStackCollectTask.getStacks();
+            StackInfo info = null;
             for (int i = stackInfos.size() - 1, count = 1; i > 0; i--) {
                 if (count > 3) {
                     break;
