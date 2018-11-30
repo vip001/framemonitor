@@ -72,12 +72,14 @@ public interface IFrameMonitorManager {
 
     /**
      * 开始流量统计
+     *
      * @return true为成功，false为失败，失败原因可能是IPC通讯未建立
      */
     boolean startFlowCal();
 
     /**
      * 停止流量统计
+     *
      * @return true为成功，false为失败，失败原因可能是IPC通讯未建立
      */
     boolean stopFlowCal();

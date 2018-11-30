@@ -6,6 +6,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.Printer;
+
+import com.vip001.monitor.bean.DropFramesBean;
+import com.vip001.monitor.utils.BussinessUtils;
 import com.vip001.monitor.utils.FormatUtils;
 
 import java.io.File;
@@ -27,10 +30,12 @@ public class LogThread extends HandlerThread implements Handler.Callback {
     private static final String TAG = "FrameMonitor";
     private static final long INTERVAL_WRITE_LOG = 5 * 1000;
     private static final int MSG_WRITE_LOG = 1;
+    private Callback mCallback;
 
-    public LogThread(File file) {
+    public LogThread(File file, Callback callback) {
         super("LogThread");
         mParentFile = file;
+        mCallback = callback;
     }
 
     @Override
@@ -51,14 +56,22 @@ public class LogThread extends HandlerThread implements Handler.Callback {
         if (mMainStackCollectTask != null) {
             mMainStackCollectTask.stop();
         }
+        mCallback = null;
         return super.quit();
     }
 
     public void writeLog() {
+
+        mHanlder.sendEmptyMessage(MSG_WRITE_LOG);
+    }
+
+    public boolean canWriteLog() {
         long currentTime = System.currentTimeMillis();
         if (!isWrite && currentTime - mLastWriteTime > INTERVAL_WRITE_LOG) {
-            mHanlder.sendEmptyMessage(MSG_WRITE_LOG);
             mLastWriteTime = currentTime;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -89,9 +102,11 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             }
 
             final PrintWriter printer = new PrintWriter(new FileOutputStream(file), true);
-
+            printer.println(BussinessUtils.META_BASE_MESSAGE);
+            printer.println(DropFramesBean.getInstance().toMinString());
+            printer.println(DropFramesBean.getInstance().toExplicitString());
             printer.println();
-            printer.println("--------MainThread Stack Before JANK--------");
+            printer.println(BussinessUtils.META_LOG_MAIN_STACK);
 
             LinkedList<StackInfo> stackInfos = mMainStackCollectTask.getStacks();
             StackInfo info = null;
@@ -107,7 +122,7 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             }
 
             printer.println();
-            printer.println("--------MainThread Message--------");
+            printer.println(BussinessUtils.META_LOG_MESSAGE);
             printer.println();
 
             Looper.getMainLooper().dump(new Printer() {
@@ -118,7 +133,7 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             }, TAG);
 
             printer.println();
-            printer.println("--------Thread Stack--------");
+            printer.println(BussinessUtils.META_THREAD_STACK);
 
             Map<Thread, StackTraceElement[]> map = Thread.getAllStackTraces();
             for (Map.Entry<Thread, StackTraceElement[]> entry : map.entrySet()) {
@@ -134,7 +149,11 @@ public class LogThread extends HandlerThread implements Handler.Callback {
 
             printer.flush();
             printer.close();
+            if (mCallback != null) {
+                mCallback.writeSuccess(file.getAbsolutePath());
+            }
             Log.i(TAG, "The application may be doing too much work on its main thread.The log file is written to " + file.getAbsolutePath());
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -152,5 +171,9 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             return true;
         }
         return false;
+    }
+
+    public interface Callback {
+        void writeSuccess(String path);
     }
 }

@@ -9,5 +9,5 @@ import com.vip001.monitor.viewholder.BaseViewHolder;
  */
 
 public interface IViewholderCreateFactory {
-     BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType,RecyclerViewAdapter adapter);
+    BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType, RecyclerViewAdapter adapter);
 }

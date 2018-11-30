@@ -23,12 +23,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="开始流量统计" />
+
     <Button
         android:id="@+id/stop"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="结束流量统计" />
+
     <WebView
         android:id="@+id/webview"
         android:layout_marginTop="10dp"

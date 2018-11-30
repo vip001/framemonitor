@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (C) 2018 Square, Inc.
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,7 +14,7 @@
   ~ limitations under the License.
   -->
 <resources>
-  <declare-styleable name="monitor_MoreDetailsView">
-    <attr name="monitor_plus_color" format="color" />
-  </declare-styleable>
+    <declare-styleable name="monitor_MoreDetailsView">
+        <attr name="monitor_plus_color" format="color" />
+    </declare-styleable>
 </resources>

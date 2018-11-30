@@ -8,6 +8,7 @@ import android.content.Context;
 public class DimentionUtils {
     public static int SCREEN_WIDTH = 0;
     public static int SCREEN_HEIGHT = 0;
+
     public static int getStatusBarHeight(Context context) {
         int result = 0;
         int resourceId = context.getResources().getIdentifier("status_bar_height", "dimen", "android");

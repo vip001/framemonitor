@@ -30,6 +30,7 @@ dependencies {
     if (findProject(':framemonitor-android-common') != null) api project(':framemonitor-android-common')
     else api "${this.group}:${commonArtifact}:${version}"
     implementation 'com.android.support:recyclerview-v7:27.0.0'
+    implementation 'com.android.support:support-v4:27.0.0'
 }
 apply from: '../public_maven_push.gradle'
 ext.defineMavenPubish("${debugArtifact}")

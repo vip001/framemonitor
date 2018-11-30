@@ -93,7 +93,7 @@ public class FlowCaculater {
         } else if (size < GB) {
             return sFormat.format(size * 1.0f / MB) + "MB";
         } else {
-            return sFormat.format(size * 1.0f / GB)+"GB";
+            return sFormat.format(size * 1.0f / GB) + "GB";
         }
     }
 }

@@ -31,7 +31,7 @@ public class DisplayDropFramesActivity extends Activity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
         setContentView(R.layout.monitor_layout_drop_frames);
         mTitle = this.findViewById(R.id.title);
         mRecycelerView = this.findViewById(R.id.reyclerview);
@@ -61,7 +61,7 @@ public class DisplayDropFramesActivity extends Activity {
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0,0);
+        overridePendingTransition(0, 0);
     }
 
     public static void start(Context context) {

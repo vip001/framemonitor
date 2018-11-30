@@ -66,6 +66,7 @@ public class RemoteBackgroundService extends Service {
     private void initMessageHandler() {
         mMessageHandlers = new ArrayList<>();
         mMessageHandlers.add(new FlowMessageHandler());
+        mMessageHandlers.add(new WriteLogMessageHandler());
     }
 
     private void notifyMessageHandler(Message msg) {

@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 
 import com.vip001.framemonitor.IConfig;
 import com.vip001.framemonitor.IFrameMonitorManager;
+import com.vip001.monitor.bean.DropFramesBean;
 import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
 import com.vip001.monitor.services.IPCBinder;
@@ -27,7 +28,7 @@ import java.util.List;
 /**
  * Created by xxd on 2018/9/20
  */
-class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.ActivityLifecycleCallbacks, IFrameMonitorManager {
+class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.ActivityLifecycleCallbacks, IFrameMonitorManager, LogThread.Callback {
     private Application mApp;
     private List<String> mReuestShowActities;
     private WeakReference<Activity> mCurrentActivity;
@@ -129,7 +130,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         }
         File parentFile = FileManager.getInstance().checkLogDir();
         if (parentFile != null) {
-            mLogThread = new LogThread(parentFile);
+            mLogThread = new LogThread(parentFile, this);
             mLogThread.start();
         }
         FrameCore.getInstance().start().registerCallback(this);
@@ -199,7 +200,8 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
 
     @Override
     public void update(long ns) {
-        if (FrameCoreConfig.getInstance().sortTime(ns) == IConfig.RESULT_RED && mLogThread != null) {
+        if (FrameCoreConfig.getInstance().sortTime(ns) == IConfig.RESULT_RED && mLogThread != null && mLogThread.canWriteLog()) {
+            saveDropFramesBean(ns);
             mLogThread.writeLog();
         }
         if (canExecStatus()) {
@@ -278,4 +280,23 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         }
     }
 
+    private void saveDropFramesBean(long framecostTime) {
+        DropFramesBean.getInstance().frameCostTime = framecostTime;
+        DropFramesBean.getInstance().happensTime = System.currentTimeMillis();
+        if (mCurrentActivity.get() != null) {
+            DropFramesBean.getInstance().topActivityName = mCurrentActivity.get().getClass().getName();
+            DropFramesBean.getInstance().topActivitySimpleName = mCurrentActivity.get().getClass().getSimpleName();
+        }
+        DropFramesBean.getInstance().isForeground = mVisibleCount > 0;
+    }
+
+    @Override
+    public void writeSuccess(String path) {
+        Message msg = Message.obtain();
+        msg.what = MsgDef.MSG_WRITE_LOG_SUCCESS;
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(DropFramesBean.KEY_TRANSACT, DropFramesBean.getInstance());
+        msg.obj = bundle;
+        mBinder.sendMessage(msg);
+    }
 }

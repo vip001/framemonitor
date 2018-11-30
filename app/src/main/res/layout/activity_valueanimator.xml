@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="开启掉帧" />
+
     <Button
         android:id="@+id/stop"
         android:layout_width="match_parent"
