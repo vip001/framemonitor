@@ -9,17 +9,17 @@ import com.vip001.framemonitor.IConfig;
 class FrameCoreConfig {
 
     private static FrameCoreConfig sInstance = new FrameCoreConfig();
+
     private IConfig mConfig = new IConfig() {
         @Override
         public int sortTime(long time) {
-            long frames = time / IConfig.FRAME_INTERVALS;
-
-            if (frames == 0) {
-                return RESULT_GREEN;
-            } else if (frames < 3) {
+            FrameCoreConfigPersistence.Config config = FrameCoreConfigPersistence.getInstance().getConfig();
+            if (time > config.redTime) {
+                return RESULT_RED;
+            } else if (time > config.yellowTime) {
                 return RESULT_YELLOW;
             } else {
-                return RESULT_RED;
+                return RESULT_GREEN;
             }
         }
     };

@@ -7,8 +7,12 @@ import java.util.Date;
  * Created by xxd on 2018/8/7
  */
 public class FormatUtils {
-    public static CharSequence formatTime(long ns) {
+    public static CharSequence formatFrameCostTime(long ns) {
         return String.format("%.3f", ns * 1.0f / 1000000);
+    }
+
+    public static CharSequence formatStandartFrameTime(float ns) {
+        return String.format("%.2f", ns / 1000000);
     }
 
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
@@ -23,4 +27,5 @@ public class FormatUtils {
         date.setTime(time);
         return sTimeFormat.format(date);
     }
+
 }

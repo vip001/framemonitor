@@ -1,6 +1,7 @@
 package com.vip001.monitor.view;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.vip001.monitor.view.snackbar.SnackBarManagerType;
 import com.vip001.monitor.view.snackbar.TSnackbar;
@@ -105,6 +106,7 @@ public class ShowStatus implements IShowStatus {
             TSnackbar snackbar = mSnackBars.get(mCurrentActivity);
             if (snackbar != null) {
                 FloatBallViewHolder view = (FloatBallViewHolder) snackbar.getHolder();
+                Log.i("xxd","updatepos pos[0]="+mPos[0]+";pos[1]="+mPos[1]);
                 view.updateBall(mPos);
                 mPos = null;
             }

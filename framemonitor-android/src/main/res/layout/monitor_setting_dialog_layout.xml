@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#7f000000">
+
+    <LinearLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingTop="@dimen/monitor_dimen_gap">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/monitor_dimen_gap"
+            android:text="堆栈收集设置(红色帧时间需大于黄色帧时间)"
+            android:textSize="18dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <TextView
+                style="@style/monitor_settingstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="红色帧时间(ms)：" />
+
+            <EditText
+                android:id="@+id/et_red"
+                style="@style/monitor_settingstyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/monitor_dimen_gap"
+                android:background="@null"
+                android:inputType="numberDecimal|number"
+                android:nextFocusDown="@+id/et_yellow"
+                android:singleLine="true" />
+
+            <TextView
+                style="@style/monitor_settingstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="黄色帧时间(ms)：" />
+
+            <EditText
+                android:id="@+id/et_yellow"
+                style="@style/monitor_settingstyle"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/monitor_dimen_gap"
+                android:background="@null"
+                android:imeOptions="actionDone"
+                android:inputType="numberDecimal|number"
+                android:singleLine="true" />
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

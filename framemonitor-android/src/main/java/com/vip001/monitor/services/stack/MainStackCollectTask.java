@@ -2,7 +2,6 @@ package com.vip001.monitor.services.stack;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -73,7 +72,6 @@ public class MainStackCollectTask implements Runnable {
         if (interval >= INTERVAL_COLLECT) {
             StackTraceElement[] elements = Looper.getMainLooper().getThread().getStackTrace();
             String targetText = elements[0].toString();
-            Log.i("xxd", "elements[0] str=" + targetText);
             if (!targetText.startsWith("com.vip001.monitor") && !sFilterStack.contains(elements[0].toString())) {
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0, len = elements.length; i < len; i++) {

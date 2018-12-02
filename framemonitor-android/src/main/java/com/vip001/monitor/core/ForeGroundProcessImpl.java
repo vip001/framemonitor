@@ -89,6 +89,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         DimentionUtils.SCREEN_HEIGHT = metrics.heightPixels;
         FileManager.getInstance().checkLogDir();
         mBinder.connect(application);
+        FrameCoreConfigPersistence.getInstance().init(application);
         return this;
     }
 

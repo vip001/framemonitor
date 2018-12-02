@@ -1,5 +1,6 @@
 package com.vip001.monitor.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 import com.vip001.framemonitor.IConfig;
 import com.vip001.monitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
+import com.vip001.monitor.dialog.SettingsDialog;
 import com.vip001.monitor.utils.DimentionUtils;
 import com.vip001.monitor.utils.FormatUtils;
+import com.vip001.monitor.utils.MutipleClickListener;
 import com.vip001.monitor.view.snackbar.SnackbarBaseViewHolder;
 
 /**
@@ -24,13 +27,23 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
     private float mLastY;
     private float mLastX;
 
-    public FloatBallViewHolder(Context context) {
+    private SettingsDialog mSettingsDialog;
+
+    public FloatBallViewHolder(Activity context) {
         super(context);
     }
 
     @Override
     public void initView() {
+        mSettingsDialog = new SettingsDialog(mContext);
         mTextView = getRootView().findViewById(R.id.text);
+        mTextView.setOnClickListener(new MutipleClickListener(2) {
+
+            @Override
+            public void onTrigerClick(View view) {
+                mSettingsDialog.show();
+            }
+        });
         mTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -70,7 +83,7 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
                     default:
                         break;
                 }
-                return true;
+                return false;
             }
         });
     }
@@ -100,7 +113,7 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
             default:
                 break;
         }
-        mTextView.setText(FormatUtils.formatTime(time));
+        mTextView.setText(FormatUtils.formatFrameCostTime(time));
     }
 
     public void updateBall(final int[] pos) {
@@ -126,4 +139,5 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
         pos[1] = mTextView.getTop();
         return pos;
     }
+
 }

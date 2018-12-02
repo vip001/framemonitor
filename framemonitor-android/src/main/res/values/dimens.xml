@@ -15,5 +15,5 @@
     <dimen name="monitor_more_margin_top">18dp</dimen>
     <dimen name="monitor_row_min">48dp</dimen>
     <dimen name="monitor_row_title_margin_top">14.5dp</dimen>
-
+    <dimen name="monitor_dimen_gap">6dp</dimen>
 </resources>
