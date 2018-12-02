@@ -5,16 +5,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.vip001.framemonitor.IConfig;
 import com.vip001.monitor.R;
 import com.vip001.monitor.activity.DropFramesDetailActivity;
 import com.vip001.monitor.adapter.RecyclerViewAdapter;
-import com.vip001.monitor.bean.ReyclerViewDropFramesDisplayBean;
+import com.vip001.monitor.bean.LoadDataBean;
+import com.vip001.monitor.utils.FormatUtils;
+
+import java.util.Locale;
 
 /**
  * Created by xxd on 2018/11/25.
  */
 
-public class DisplayDropFramesViewHolder extends BaseViewHolder<ReyclerViewDropFramesDisplayBean> {
+public class DisplayDropFramesViewHolder extends BaseViewHolder<LoadDataBean> {
     private TextView mContent;
     private TextView mDate;
 
@@ -25,14 +29,16 @@ public class DisplayDropFramesViewHolder extends BaseViewHolder<ReyclerViewDropF
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DropFramesDetailActivity.start(v.getContext());
+                DropFramesDetailActivity.start(v.getContext(), mData.fileName);
             }
         });
     }
 
     @Override
-    protected void initialData(int position, ReyclerViewDropFramesDisplayBean data) {
-        mContent.setText(data.content);
-        mDate.setText(data.date);
+    protected void initialData(int position, LoadDataBean data) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(data.dropFramesBean.topActivityName).append(" drop ").append(data.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS - 1).append(" frames");
+        mContent.setText(builder);
+        mDate.setText(FormatUtils.formatTime(data.dropFramesBean.happensTime));
     }
 }

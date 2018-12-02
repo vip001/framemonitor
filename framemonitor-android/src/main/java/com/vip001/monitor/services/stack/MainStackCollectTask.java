@@ -83,7 +83,7 @@ public class MainStackCollectTask implements Runnable {
                 if (mStacks.size() > 5) {
                     mStacks.removeFirst();
                 }
-                mStacks.addLast(new StackInfo(builder.toString(), currentTime));
+                mStacks.addLast(new StackInfo(builder, currentTime));
             }
             mLastDumpTime = currentTime;
             mLaucherHandler.postDelayed(this, INTERVAL_COLLECT);

@@ -56,7 +56,6 @@ public class FileManager {
     private File checkDir(File file, int alter) {
         if (!file.exists()) {
             if (file.mkdirs()) {
-                Log.i(TAG, "FrameMonitor log path=" + file.getAbsolutePath());
                 return file;
             } else {
                 String dir = getDir(alter);
@@ -66,7 +65,6 @@ public class FileManager {
                 return checkDir(new File(getDir(alter)), TYPE_DIR_ABORT);
             }
         } else {
-            Log.i(TAG, "FrameMonitor log path=" + file.getAbsolutePath());
             return file;
 
         }

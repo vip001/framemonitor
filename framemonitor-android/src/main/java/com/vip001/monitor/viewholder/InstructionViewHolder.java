@@ -7,21 +7,21 @@ import android.widget.TextView;
 
 import com.vip001.monitor.R;
 import com.vip001.monitor.adapter.RecyclerViewAdapter;
-import com.vip001.monitor.services.stack.StackInfo;
+import com.vip001.monitor.bean.InstructionBean;
 import com.vip001.monitor.widget.DisplayLeakConnectorView;
 import com.vip001.monitor.widget.MoreDetailsView;
 
 /**
- * Created by xxd on 2018/11/24.
+ * Created by xxd on 2018/12/2.
  */
 
-public class StackViewHolder extends BaseViewHolder<StackInfo> {
+public class InstructionViewHolder extends BaseViewHolder<InstructionBean> {
     private DisplayLeakConnectorView mConnector;
     private MoreDetailsView mMoreBtn;
     private TextView mTitle;
     private TextView mDetail;
 
-    public StackViewHolder(ViewGroup parent, RecyclerViewAdapter adapter) {
+    public InstructionViewHolder(ViewGroup parent, RecyclerViewAdapter adapter) {
         super(LayoutInflater.from(parent.getContext()).inflate(R.layout.monitor_ref_row, parent, false), adapter);
         mConnector = itemView.findViewById(R.id.row_connector);
         mMoreBtn = itemView.findViewById(R.id.row_more);
@@ -36,20 +36,10 @@ public class StackViewHolder extends BaseViewHolder<StackInfo> {
     }
 
     @Override
-    protected void initialData(int position, StackInfo data) {
-        mTitle.setText(data.timeString);
-        mDetail.setText(data.msg);
-        mConnector.setType(getType(position));
-    }
-
-    private DisplayLeakConnectorView.Type getType(int pos) {
-        if (pos == 2) {
-            return DisplayLeakConnectorView.Type.START_LAST_REACHABLE;
-        } else if (pos == mAdpater.getItemCount() - 1) {
-            return DisplayLeakConnectorView.Type.END_FIRST_UNREACHABLE;
-        } else {
-            return DisplayLeakConnectorView.Type.NODE_UNKNOWN;
-        }
+    protected void initialData(int position, InstructionBean data) {
+        mTitle.setText(data.title);
+        mDetail.setText(data.details);
+        mConnector.setType(DisplayLeakConnectorView.Type.HELP);
     }
 
     public void setOpen(boolean isOpen) {

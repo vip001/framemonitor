@@ -24,4 +24,8 @@ public class BussinessUtils {
     public static final String META_LOG_MESSAGE = "--------MainThread Message--------";
     public static final String META_THREAD_STACK = "--------Thread Stack--------";
     public static final String META_BASE_MESSAGE = "--------Base Message--------";
+    public static final String META_STACK_TIME_START = "#timestart";
+    public static final String META_STACK_TIME_END = "#timeend";
+    public static final String META_STACK_START = "#stackstart";
+    public static final String META_STACK_END = "#stackend";
 }

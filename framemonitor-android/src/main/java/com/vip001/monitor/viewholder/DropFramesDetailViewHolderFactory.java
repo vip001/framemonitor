@@ -21,6 +21,9 @@ public class DropFramesDetailViewHolderFactory implements IViewholderCreateFacto
             case ViewType.TYPE_TOP_ROW:
                 holder = new TopRowViewHolder(parent, adapter);
                 break;
+            case ViewType.TYPE_INTRODUCE:
+                holder = new InstructionViewHolder(parent, adapter);
+                break;
             default:
                 holder = new DefaultViewHolder(parent, adapter);
                 break;

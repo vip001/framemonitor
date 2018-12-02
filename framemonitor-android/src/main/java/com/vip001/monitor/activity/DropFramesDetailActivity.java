@@ -12,15 +12,19 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.widget.TextView;
 
+import com.vip001.framemonitor.IConfig;
 import com.vip001.monitor.R;
 import com.vip001.monitor.adapter.RecyclerViewAdapter;
 import com.vip001.monitor.bean.BaseRecyclerViewBean;
-import com.vip001.monitor.bean.RecyclerViewStackBean;
+import com.vip001.monitor.bean.InstructionBean;
+import com.vip001.monitor.bean.LoadDataBean;
 import com.vip001.monitor.common.ViewType;
+import com.vip001.monitor.services.stack.StackInfo;
+import com.vip001.monitor.utils.DataLoadHelper;
 import com.vip001.monitor.viewholder.DropFramesDetailViewHolderFactory;
-import com.vip001.monitor.widget.DisplayLeakConnectorView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by xxd on 2018/11/24.
@@ -32,6 +36,7 @@ public class DropFramesDetailActivity extends Activity {
     private LinearLayoutManager mLayoutManager;
     private TextView mDelete;
     private TextView mTitle;
+    private static final String KEY_FILE_NAME = "KEY_FILE_NAME";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,10 +51,34 @@ public class DropFramesDetailActivity extends Activity {
         mReyclerView.setLayoutManager(mLayoutManager);
         mReyclerView.setAdapter(mAdapter);
         mDelete = this.findViewById(R.id.action);
-        testData();
+        preloadData();
+        resolveIntent();
     }
 
-    public void testData() {
+
+    private void resolveIntent() {
+        String name = getIntent().getStringExtra(KEY_FILE_NAME);
+        LoadDataBean bean = DataLoadHelper.getInstance().getData(name);
+        if (bean == null) {
+            return;
+        }
+        mTitle.setText(new StringBuilder(bean.dropFramesBean.topActivitySimpleName).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
+        mAdapter.addData(transformData(bean.listStackInfo));
+    }
+
+    private List<BaseRecyclerViewBean> transformData(List<StackInfo> info) {
+        ArrayList<BaseRecyclerViewBean> result = new ArrayList<>();
+        BaseRecyclerViewBean bean = null;
+        for (int i = 0, len = info.size(); i < len; i++) {
+            bean = new BaseRecyclerViewBean();
+            bean.type = ViewType.TYPE_STACk;
+            bean.data = info.get(i);
+            result.add(bean);
+        }
+        return result;
+    }
+
+    public void preloadData() {
         ArrayList<BaseRecyclerViewBean> beans = new ArrayList<>();
         BaseRecyclerViewBean bean = new BaseRecyclerViewBean();
         bean.type = ViewType.TYPE_TOP_ROW;
@@ -57,9 +86,9 @@ public class DropFramesDetailActivity extends Activity {
         beans.add(bean);
 
         BaseRecyclerViewBean bean1 = new BaseRecyclerViewBean();
-        bean1.type = ViewType.TYPE_STACk;
-        RecyclerViewStackBean two = new RecyclerViewStackBean();
-        two.title = Html.fromHtml("<font color='"
+        bean1.type = ViewType.TYPE_INTRODUCE;
+        InstructionBean instruction = new InstructionBean();
+        instruction.title = Html.fromHtml("<font color='"
                 + hexStringColor(getResources(), R.color.monitor_help)
                 + "'>"
                 + "<b>" + getResources().getString(R.string.monitor_help_title) + "</b>"
@@ -68,14 +97,13 @@ public class DropFramesDetailActivity extends Activity {
         SpannableStringBuilder detailText =
                 (SpannableStringBuilder) Html.fromHtml(
                         getResources().getString(R.string.monitor_help_detail));
-        two.details = detailText;
-        two.type = DisplayLeakConnectorView.Type.HELP;
-        bean1.data = two;
+        instruction.details = detailText;
+        bean1.data = instruction;
         beans.add(bean1);
 
-        BaseRecyclerViewBean bean2 = new BaseRecyclerViewBean();
+       /* BaseRecyclerViewBean bean2 = new BaseRecyclerViewBean();
         bean2.type = ViewType.TYPE_STACk;
-        RecyclerViewStackBean three = new RecyclerViewStackBean();
+        InstructionBean three = new InstructionBean();
         three.title = "testData";
         three.details = "testtest";
         three.type = DisplayLeakConnectorView.Type.START_LAST_REACHABLE;
@@ -84,13 +112,12 @@ public class DropFramesDetailActivity extends Activity {
 
         BaseRecyclerViewBean bean3 = new BaseRecyclerViewBean();
         bean3.type = ViewType.TYPE_STACk;
-        RecyclerViewStackBean four = new RecyclerViewStackBean();
+        InstructionBean four = new InstructionBean();
         four.title = "testData";
         four.details = "testtest";
         four.type = DisplayLeakConnectorView.Type.END_FIRST_UNREACHABLE;
         bean3.data = four;
-        beans.add(bean3);
-
+        beans.add(bean3);*/
         mAdapter.setData(beans);
     }
 
@@ -98,11 +125,12 @@ public class DropFramesDetailActivity extends Activity {
         return String.format("#%06X", (0xFFFFFF & resources.getColor(colorResId)));
     }
 
-    public static void start(Context context) {
+    public static void start(Context context, String fileNames) {
         if (context == null) {
             return;
         }
         Intent intent = new Intent(context, DropFramesDetailActivity.class);
+        intent.putExtra(KEY_FILE_NAME, fileNames);
         context.startActivity(intent);
 
     }

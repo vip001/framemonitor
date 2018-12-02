@@ -2,6 +2,7 @@ package com.vip001.monitor.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 import com.vip001.monitor.utils.FormatUtils;
 
@@ -57,13 +58,35 @@ public class DropFramesBean implements Parcelable {
     }
 
     public String toMinString() {
-        return new StringBuilder().append(topActivityName).append("#").append(isForeground).append("#").append(frameCostTime).append("#").append(happensTime).toString();
+        return new StringBuilder().append(topActivityName).append("#").append(topActivitySimpleName).append("#").append(isForeground).append("#").append(frameCostTime).append("#").append(happensTime).toString();
+    }
+
+    public static DropFramesBean parse(String origin) {
+        DropFramesBean result = new DropFramesBean();
+        if (TextUtils.isEmpty(origin)) {
+            return result;
+        }
+        try {
+            DropFramesBean bean = new DropFramesBean();
+            String[] text = origin.split("#");
+            bean.topActivityName = text[0];
+            bean.topActivitySimpleName = text[1];
+            bean.isForeground = Boolean.parseBoolean(text[2]);
+            bean.frameCostTime = Long.parseLong(text[3]);
+            bean.happensTime = Long.parseLong(text[4]);
+            result = bean;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 
     public String toExplicitString() {
         return new StringBuilder().append("topActivity:").append(topActivityName).append("\r\n")
                 .append("isForeground=").append(isForeground).append("\r\n")
                 .append("frameCostTime:").append(frameCostTime).append("\r\n")
-                .append("happensTime:").append(FormatUtils.formatDate(happensTime)).toString();
+                .append("happensTime:").append(FormatUtils.formatTime(happensTime))
+                .toString();
     }
 }

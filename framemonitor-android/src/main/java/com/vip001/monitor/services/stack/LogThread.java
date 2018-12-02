@@ -116,8 +116,12 @@ public class LogThread extends HandlerThread implements Handler.Callback {
                 }
                 printer.println();
                 info = stackInfos.get(i);
-                printer.println(FormatUtils.formatDate(info.time));
+                printer.println(BussinessUtils.META_STACK_TIME_START);
+                printer.println(FormatUtils.formatTime(info.time));
+                printer.println(BussinessUtils.META_STACK_TIME_END);
+                printer.println(BussinessUtils.META_STACK_START);
                 printer.println(info.msg);
+                printer.println(BussinessUtils.META_STACK_END);
                 count++;
             }
 

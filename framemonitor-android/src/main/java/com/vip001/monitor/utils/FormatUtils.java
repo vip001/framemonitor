@@ -22,7 +22,7 @@ public class FormatUtils {
         return sDateFormat.format(date);
     }
 
-    public static String formatDate(long time) {
+    public static String formatTime(long time) {
         Date date = new Date();
         date.setTime(time);
         return sTimeFormat.format(date);
