@@ -1,7 +1,6 @@
 package com.vip001.monitor.common;
 
 import android.app.Application;
-import android.util.Log;
 
 import java.io.File;
 

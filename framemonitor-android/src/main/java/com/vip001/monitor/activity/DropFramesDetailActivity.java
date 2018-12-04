@@ -20,6 +20,7 @@ import com.vip001.monitor.bean.InstructionBean;
 import com.vip001.monitor.bean.LoadDataBean;
 import com.vip001.monitor.common.ViewType;
 import com.vip001.monitor.services.stack.StackInfo;
+import com.vip001.monitor.utils.BussinessUtils;
 import com.vip001.monitor.utils.DataLoadHelper;
 import com.vip001.monitor.viewholder.DropFramesDetailViewHolderFactory;
 
@@ -62,7 +63,7 @@ public class DropFramesDetailActivity extends Activity {
         if (bean == null) {
             return;
         }
-        mTitle.setText(new StringBuilder(bean.dropFramesBean.topActivitySimpleName).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
+        mTitle.setText(new StringBuilder(BussinessUtils.getDropFramesTarget(bean.dropFramesBean, true)).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
         mAdapter.addData(transformData(bean.listStackInfo));
     }
 

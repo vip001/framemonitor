@@ -10,9 +10,8 @@ import com.vip001.monitor.R;
 import com.vip001.monitor.activity.DropFramesDetailActivity;
 import com.vip001.monitor.adapter.RecyclerViewAdapter;
 import com.vip001.monitor.bean.LoadDataBean;
+import com.vip001.monitor.utils.BussinessUtils;
 import com.vip001.monitor.utils.FormatUtils;
-
-import java.util.Locale;
 
 /**
  * Created by xxd on 2018/11/25.
@@ -37,7 +36,8 @@ public class DisplayDropFramesViewHolder extends BaseViewHolder<LoadDataBean> {
     @Override
     protected void initialData(int position, LoadDataBean data) {
         StringBuilder builder = new StringBuilder();
-        builder.append(data.dropFramesBean.topActivityName).append(" drop ").append(data.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS - 1).append(" frames");
+        String target = BussinessUtils.getDropFramesTarget(data.dropFramesBean, false);
+        builder.append(target).append(" drop ").append(data.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS - 1).append(" frames");
         mContent.setText(builder);
         mDate.setText(FormatUtils.formatTime(data.dropFramesBean.happensTime));
     }

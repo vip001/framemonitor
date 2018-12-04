@@ -16,6 +16,7 @@ import com.vip001.monitor.R;
 import com.vip001.monitor.activity.DisplayDropFramesActivity;
 import com.vip001.monitor.bean.DropFramesBean;
 import com.vip001.monitor.common.MsgDef;
+import com.vip001.monitor.utils.BussinessUtils;
 
 public class WriteLogMessageHandler implements IMessageHandler {
     private NotificationManagerCompat mNotificationManager;
@@ -50,7 +51,7 @@ public class WriteLogMessageHandler implements IMessageHandler {
             NotificationManager manager = (NotificationManager) env.applicationContext.getSystemService(Context.NOTIFICATION_SERVICE);
             manager.createNotificationChannel(channel);
         }
-        String notifycontent = bean.isForeground ? bean.topActivitySimpleName : "Background";
+        String notifycontent = BussinessUtils.getDropFramesTarget(bean, true);
         Intent intent = new Intent(env.applicationContext, DisplayDropFramesActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(env.applicationContext, 1001, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         Notification notification = new NotificationCompat.Builder(env.applicationContext, env.applicationContext.getPackageName())
