@@ -19,4 +19,6 @@
   <br>
   Tap on each reference row for more details, tap again to close.
 ]]></string>
+    <string name="monitor_delete_all_dropframes_title">Are you sure you want to delete all drop frames ?</string>
+    <string name="monitor_delete_all">Delete all</string>
 </resources>

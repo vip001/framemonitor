@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginEnd="25dp"
+    android:layout_marginStart="25dp"
+    android:background="#666666"
+    android:padding="25dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="10dp"
+        android:drawableStart="@android:drawable/ic_dialog_alert"
+        android:text="@string/monitor_delete_all"
+        android:textColor="#fff"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/monitor_delete_all_dropframes_title"
+        android:textColor="#fff"
+        android:textSize="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="37dp"
+        android:layout_marginTop="25dp"
+        android:padding="5dp"
+        android:text="Cancel"
+        android:textColor="#90c7c2"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/sure"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <TextView
+        android:id="@+id/sure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:padding="5dp"
+        android:text="Sure"
+        android:textColor="#90c7c2"
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+</android.support.constraint.ConstraintLayout>

@@ -1,5 +1,6 @@
 package com.vip001.monitor.viewholder;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +29,7 @@ public class DisplayDropFramesViewHolder extends BaseViewHolder<LoadDataBean> {
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DropFramesDetailActivity.start(v.getContext(), mData.fileName);
+                DropFramesDetailActivity.start((Activity) v.getContext(), mData.fileName);
             }
         });
     }

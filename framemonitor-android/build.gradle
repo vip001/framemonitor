@@ -31,6 +31,7 @@ dependencies {
     else api "${this.group}:${commonArtifact}:${version}"
     implementation 'com.android.support:recyclerview-v7:27.0.0'
     implementation 'com.android.support:support-v4:27.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.0-alpha2'
 }
 apply from: '../public_maven_push.gradle'
 ext.defineMavenPubish("${debugArtifact}")

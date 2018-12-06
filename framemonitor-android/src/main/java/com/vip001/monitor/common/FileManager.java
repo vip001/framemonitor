@@ -86,4 +86,22 @@ public class FileManager {
         }
         return dir;
     }
+
+    public void deleteAllLogFiles() {
+        File logFile = checkLogDir();
+        File[] files = logFile.listFiles();
+        for (int i = 0, len = files.length; i < len; i++) {
+            if (files[i].isFile()) {
+                files[i].delete();
+            }
+        }
+    }
+
+    public void deleteLog(String fileName) {
+        File parent = checkLogDir();
+        File logFile = new File(parent, fileName);
+        if (logFile.isFile() && logFile.exists()) {
+            logFile.delete();
+        }
+    }
 }

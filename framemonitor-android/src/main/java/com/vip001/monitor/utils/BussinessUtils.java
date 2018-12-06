@@ -27,4 +27,5 @@ public class BussinessUtils {
     public static final String META_STACK_TIME_END = "#timeend";
     public static final String META_STACK_START = "#stackstart";
     public static final String META_STACK_END = "#stackend";
+    public static final String KEY_DELETE_FILE = "KEY_DELETE_FILE";
 }

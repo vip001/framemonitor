@@ -1,7 +1,6 @@
 package com.vip001.monitor.activity;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -10,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
+import android.view.View;
 import android.widget.TextView;
 
 import com.vip001.framemonitor.IConfig;
@@ -18,6 +18,7 @@ import com.vip001.monitor.adapter.RecyclerViewAdapter;
 import com.vip001.monitor.bean.BaseRecyclerViewBean;
 import com.vip001.monitor.bean.InstructionBean;
 import com.vip001.monitor.bean.LoadDataBean;
+import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.ViewType;
 import com.vip001.monitor.services.stack.StackInfo;
 import com.vip001.monitor.utils.BussinessUtils;
@@ -37,6 +38,7 @@ public class DropFramesDetailActivity extends Activity {
     private LinearLayoutManager mLayoutManager;
     private TextView mDelete;
     private TextView mTitle;
+    private String mFileName;
     private static final String KEY_FILE_NAME = "KEY_FILE_NAME";
 
     @Override
@@ -52,6 +54,17 @@ public class DropFramesDetailActivity extends Activity {
         mReyclerView.setLayoutManager(mLayoutManager);
         mReyclerView.setAdapter(mAdapter);
         mDelete = this.findViewById(R.id.action);
+        mDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FileManager.getInstance().deleteLog(mFileName);
+                DataLoadHelper.getInstance().clearData(mFileName);
+                Intent intent = getIntent();
+                intent.putExtra(BussinessUtils.KEY_DELETE_FILE, mFileName);
+                setResult(1002, intent);
+                finish();
+            }
+        });
         preloadData();
         resolveIntent();
     }
@@ -65,6 +78,7 @@ public class DropFramesDetailActivity extends Activity {
         }
         mTitle.setText(new StringBuilder(BussinessUtils.getDropFramesTarget(bean.dropFramesBean, true)).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
         mAdapter.addData(transformData(bean.listStackInfo));
+        mFileName = name;
     }
 
     private List<BaseRecyclerViewBean> transformData(List<StackInfo> info) {
@@ -126,13 +140,20 @@ public class DropFramesDetailActivity extends Activity {
         return String.format("#%06X", (0xFFFFFF & resources.getColor(colorResId)));
     }
 
-    public static void start(Context context, String fileNames) {
+    public static void start(Activity context, String fileNames) {
         if (context == null) {
             return;
         }
         Intent intent = new Intent(context, DropFramesDetailActivity.class);
         intent.putExtra(KEY_FILE_NAME, fileNames);
-        context.startActivity(intent);
+        context.startActivityForResult(intent, 1001);
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(1002, getIntent());
+        super.onBackPressed();
 
     }
 

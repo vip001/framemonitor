@@ -3,7 +3,6 @@ package com.vip001.monitor.utils;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.vip001.monitor.bean.DropFramesBean;
 import com.vip001.monitor.bean.LoadDataBean;
@@ -29,7 +28,6 @@ public class DataLoadHelper {
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
     private DataLoadHelper() {
-        Log.i("xxd", "Helper");
     }
 
     public static DataLoadHelper getInstance() {
@@ -44,6 +42,14 @@ public class DataLoadHelper {
 
     public LoadDataBean getData(String key) {
         return mDatas.get(key);
+    }
+
+    public void clearData(String key) {
+        mDatas.remove(key);
+    }
+
+    public void clearData() {
+        mDatas.clear();
     }
 
     public void loadData(final Callback callback) {

@@ -40,7 +40,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
     private boolean enableBackgroundMonitor;
     private IShowStatus mShowStatus;
     private IPCBinder mBinder;
-
+    private IConfig mConfig;
 
     ForeGroundProcessImpl() {
         mReuestShowActities = new ArrayList<>();
@@ -56,13 +56,15 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
 
     @Override
     public IFrameMonitorManager setConfig(IConfig config) {
-        FrameCoreConfig.getInstance().setConfig(config);
+        if (config != null) {
+            mConfig = config;
+        }
         return this;
     }
 
     @Override
     public IConfig getConfig() {
-        return FrameCoreConfig.getInstance().getConfig();
+        return mConfig;
     }
 
     @Override
@@ -90,6 +92,19 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         FileManager.getInstance().checkLogDir();
         mBinder.connect(application);
         FrameCoreConfigPersistence.getInstance().init(application);
+        mConfig = new IConfig() {
+            @Override
+            public int sortTime(long time) {
+                FrameCoreConfigPersistence.Config config = FrameCoreConfigPersistence.getInstance().getConfig();
+                if (time > config.redTime) {
+                    return RESULT_RED;
+                } else if (time > config.yellowTime) {
+                    return RESULT_YELLOW;
+                } else {
+                    return RESULT_GREEN;
+                }
+            }
+        };
         return this;
     }
 
@@ -201,7 +216,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
 
     @Override
     public void update(long ns) {
-        if (FrameCoreConfig.getInstance().sortTime(ns) == IConfig.RESULT_RED && mLogThread != null && mLogThread.canWriteLog()) {
+        if (mConfig.sortTime(ns) == IConfig.RESULT_RED && mLogThread != null && mLogThread.canWriteLog()) {
             saveDropFramesBean(ns);
             mLogThread.writeLog();
         }

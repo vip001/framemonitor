@@ -30,6 +30,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return this;
     }
 
+    public void clearData() {
+        mDatas = new ArrayList<>();
+        notifyDataSetChanged();
+    }
+
     public RecyclerViewAdapter setViewHolderFactory(IViewholderCreateFactory factory) {
         this.mViewHolderFactory = factory;
         return this;
