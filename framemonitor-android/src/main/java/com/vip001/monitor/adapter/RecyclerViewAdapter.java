@@ -41,11 +41,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public RecyclerViewAdapter addData(List<BaseRecyclerViewBean> beans) {
+        return insertData(beans, mDatas.size());
+    }
+
+    public RecyclerViewAdapter insertData(List<BaseRecyclerViewBean> beans, int pos) {
         if (CommonUtils.isEmpty(beans)) {
             return this;
         }
-        int startPos = mDatas.size();
-        mDatas.addAll(beans);
+        if (pos < 0 || pos > mDatas.size()) {
+            return this;
+        }
+        int startPos = pos;
+        mDatas.addAll(startPos, beans);
         notifyItemRangeInserted(startPos, beans.size());
         return this;
     }

@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +25,8 @@ import com.vip001.monitor.utils.ThreadUtils;
 import com.vip001.monitor.viewholder.DisplayDropFramesViewHolderFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -58,9 +59,12 @@ public class DisplayDropFramesActivity extends Activity {
         mAdapter = new RecyclerViewAdapter();
         mAdapter.setViewHolderFactory(new DisplayDropFramesViewHolderFactory());
         mRecycelerView.setAdapter(mAdapter);
-        mAdapter.addData(transformData(DataLoadHelper.getInstance().getData()));
+        mAdapter.setData(transformData(DataLoadHelper.getInstance().getData()));
+        mRecycelerView.scrollToPosition(0);
         if (mAdapter.getItemCount() > 0) {
             mDelete.setVisibility(View.VISIBLE);
+        } else {
+            mDelete.setVisibility(View.GONE);
         }
         mDialog = new DeleteDialog(this).setCallback(new DeleteDialog.Callback() {
             @Override
@@ -100,9 +104,12 @@ public class DisplayDropFramesActivity extends Activity {
             @Override
             public void onFinish(List<LoadDataBean> beans) {
                 if (beans.size() > 0) {
-                    mAdapter.addData(transformData(beans));
+                    mAdapter.insertData(transformData(beans), 0);
+                    mRecycelerView.scrollToPosition(0);
                     if (mAdapter.getItemCount() > 0) {
                         mDelete.setVisibility(View.VISIBLE);
+                    } else {
+                        mDelete.setVisibility(View.GONE);
                     }
                 }
                 mTitle.setText(String.format("Drop Frames in %s", getPackageName()));
@@ -122,12 +129,29 @@ public class DisplayDropFramesActivity extends Activity {
 
     private List<BaseRecyclerViewBean> transformData(List<LoadDataBean> beans) {
         ArrayList<BaseRecyclerViewBean> result = new ArrayList<>();
+        if (beans == null) {
+            return result;
+        }
+        Collections.sort(beans, new Comparator<LoadDataBean>() {
+            @Override
+            public int compare(LoadDataBean o1, LoadDataBean o2) {
+                if (o1.dropFramesBean.happensTime > o2.dropFramesBean.happensTime) {
+                    return -1;
+                } else if (o1.dropFramesBean.happensTime < o2.dropFramesBean.happensTime) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
         BaseRecyclerViewBean data = null;
         for (int i = 0, len = beans.size(); i < len; i++) {
             data = new BaseRecyclerViewBean();
             data.type = ViewType.TYPE_DISPLAY_DROP_FRAMES;
             data.data = beans.get(i);
             result.add(data);
+            LoadDataBean bean = null;
+
         }
         return result;
     }
