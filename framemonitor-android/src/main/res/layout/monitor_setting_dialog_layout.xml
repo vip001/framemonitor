@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/monitor_dimen_gap"
-            android:text="堆栈收集设置(红色帧时间需大于黄色帧时间)"
+            android:text="堆栈收集设置(红色帧时间需大于黄色帧时间):"
             android:textSize="18dp" />
 
         <LinearLayout
@@ -62,5 +62,37 @@
                 android:inputType="numberDecimal|number"
                 android:singleLine="true" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/monitor_dimen_gap"
+            android:text="流量统计:"
+            android:textSize="18dp" />
+
+        <RadioGroup
+            android:id="@+id/flow_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <RadioButton
+                android:id="@+id/open"
+                style="@style/monitor_settingstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="开启" />
+
+            <RadioButton
+                android:id="@+id/close"
+                style="@style/monitor_settingstyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/monitor_dimen_gap"
+                android:checked="false"
+                android:text="关闭" />
+        </RadioGroup>
     </LinearLayout>
 </FrameLayout>

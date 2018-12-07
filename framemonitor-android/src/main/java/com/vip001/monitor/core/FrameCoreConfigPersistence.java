@@ -13,6 +13,7 @@ public class FrameCoreConfigPersistence {
     private SharedPreferences mPreference;
     private static final String KEY_RED = "60c43c46f5201cd4f79150e867464636";
     private static final String KEY_YELLOW = "e93d645782a8e15022d3e4479b1351af";
+    private static final String KEY_FLOW = "0ff43332381a4c6ceddfbab83ce508e5";
     private static final FrameCoreConfigPersistence sIntance = new FrameCoreConfigPersistence();
     private Config mConfig;
 
@@ -32,6 +33,7 @@ public class FrameCoreConfigPersistence {
             config.redTime = IConfig.FRAME_INTERVALS * 4;
             config.yellowTime = IConfig.FRAME_INTERVALS;
         }
+        config.isOpen = mPreference.getBoolean(KEY_FLOW, false);
         mConfig = config;
         return this;
     }
@@ -64,8 +66,15 @@ public class FrameCoreConfigPersistence {
         return applyConfig(config);
     }
 
+    public FrameCoreConfigPersistence applyConfig(boolean isOpen) {
+        mPreference.edit().putBoolean(KEY_FLOW, isOpen).apply();
+        mConfig.isOpen = isOpen;
+        return this;
+    }
+
     public static class Config {
         public float redTime;
         public float yellowTime;
+        public boolean isOpen;
     }
 }

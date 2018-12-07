@@ -106,7 +106,6 @@ public class ShowStatus implements IShowStatus {
             TSnackbar snackbar = mSnackBars.get(mCurrentActivity);
             if (snackbar != null) {
                 FloatBallViewHolder view = (FloatBallViewHolder) snackbar.getHolder();
-                Log.i("xxd","updatepos pos[0]="+mPos[0]+";pos[1]="+mPos[1]);
                 view.updateBall(mPos);
                 mPos = null;
             }

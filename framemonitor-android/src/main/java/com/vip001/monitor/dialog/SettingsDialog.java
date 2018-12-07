@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.vip001.monitor.R;
@@ -24,6 +25,7 @@ public class SettingsDialog extends BasicDialog {
     private EditText mEtRed;
     private EditText mEtYellow;
     private int mOriginSoftInputMode;
+    private RadioGroup mFlowChoice;
 
     public SettingsDialog(@NonNull Context context) {
         super(context);
@@ -38,11 +40,23 @@ public class SettingsDialog extends BasicDialog {
         mRootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                saveSettings();
+                SettingsDialog.this.cancel();
             }
         });
         mEtRed = this.findViewById(R.id.et_red);
         mEtYellow = this.findViewById(R.id.et_yellow);
+        mFlowChoice = this.findViewById(R.id.flow_container);
+        mFlowChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.open) {
+                    FrameCoreConfigPersistence.getInstance().applyConfig(true);
+                } else if (checkedId == R.id.close) {
+                    FrameCoreConfigPersistence.getInstance().applyConfig(false);
+                }
+            }
+        });
         mEtYellow.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -53,6 +67,11 @@ public class SettingsDialog extends BasicDialog {
                 return false;
             }
         });
+        if (FrameCoreConfigPersistence.getInstance().getConfig().isOpen) {
+            mFlowChoice.check(R.id.open);
+        }else{
+            mFlowChoice.check(R.id.close);
+        }
     }
 
     private void readConfig() {
@@ -108,13 +127,6 @@ public class SettingsDialog extends BasicDialog {
 
     @Override
     protected View onCreateView(FrameLayout container) {
-        container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveSettings();
-                SettingsDialog.this.cancel();
-            }
-        });
         return LayoutInflater.from(container.getContext()).inflate(R.layout.monitor_setting_dialog_layout, container, false);
     }
 
