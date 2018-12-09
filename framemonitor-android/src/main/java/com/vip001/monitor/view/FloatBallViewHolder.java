@@ -26,7 +26,8 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
     private TextView mTextView;
     private float mLastY;
     private float mLastX;
-
+    private static int MAX_MARGIN_WIDTH = 0;
+    private static int MAX_MARGIN_HEIGHT = 0;
     private SettingsDialog mSettingsDialog;
 
     public FloatBallViewHolder(Activity context) {
@@ -44,6 +45,13 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
                 mSettingsDialog.show();
             }
         });
+        mTextView.post(new Runnable() {
+            @Override
+            public void run() {
+                MAX_MARGIN_WIDTH = DimentionUtils.SCREEN_WIDTH - mTextView.getWidth();
+                MAX_MARGIN_HEIGHT = DimentionUtils.SCREEN_HEIGHT - mTextView.getHeight();
+            }
+        });
         mTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -55,9 +63,11 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
                     case MotionEvent.ACTION_MOVE:
 
                     case MotionEvent.ACTION_UP:
+
                         int dy = (int) (event.getY() - mLastY);
                         int dx = (int) (event.getX() - mLastX);
-                        int left = mTextView.getLeft() + dx;
+                        updateBall(dx, dy);
+                          /*int left = mTextView.getLeft() + dx;
                         int top = mTextView.getTop() + dy;
                         int right = mTextView.getRight() + dx;
                         int bottom = mTextView.getBottom() + dy;
@@ -78,7 +88,7 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
                             top = bottom - mTextView.getHeight();
                         }
 
-                        mTextView.layout(left, top, right, bottom);
+                        mTextView.layout(left, top, right, bottom);*/
                         break;
                     default:
                         break;
@@ -120,17 +130,29 @@ public class FloatBallViewHolder extends SnackbarBaseViewHolder<Object> {
         if (pos == null || pos.length != 2) {
             return;
         }
-        if (mTextView.getWidth() == 0) {
-            FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mTextView.getLayoutParams();
-            params.leftMargin = pos[0];
-            params.topMargin = pos[1];
-            params.bottomMargin = 0;
-            params.rightMargin = 0;
-            mTextView.setLayoutParams(params);
-        } else {
-            mTextView.layout(pos[0], pos[1], pos[0] + mTextView.getWidth(), pos[1] + mTextView.getHeight());
-        }
+        updateBall(pos[0], pos[1]);
+    }
 
+    public void updateBall(int dx, int dy) {
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) mTextView.getLayoutParams();
+        int start = params.getMarginStart();
+        int newStart = start + dx;
+        if (newStart > MAX_MARGIN_WIDTH - params.getMarginEnd()) {
+            newStart = MAX_MARGIN_WIDTH - params.getMarginEnd();
+        } else if (newStart < 0) {
+            newStart = 0;
+        }
+        int top = params.topMargin;
+        int newTop = top + dy;
+        if (newTop > MAX_MARGIN_HEIGHT - params.bottomMargin) {
+            newTop = MAX_MARGIN_HEIGHT - params.bottomMargin;
+        }
+        if (newTop < 0) {
+            newTop = 0;
+        }
+        params.setMarginStart(newStart);
+        params.topMargin = newTop;
+        mTextView.setLayoutParams(params);
     }
 
     public int[] getBallPos() {

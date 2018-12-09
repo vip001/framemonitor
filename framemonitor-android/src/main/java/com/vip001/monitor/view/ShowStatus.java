@@ -1,7 +1,6 @@
 package com.vip001.monitor.view;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.vip001.monitor.view.snackbar.SnackBarManagerType;
 import com.vip001.monitor.view.snackbar.TSnackbar;
