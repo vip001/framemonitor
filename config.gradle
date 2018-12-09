@@ -1,5 +1,5 @@
 def configs = [:]
-configs.version = "1.0.0"
+configs.version = "2.0.0"
 configs.dryRun = "true"
 configs.group = "com.github.vip001"
 configs.releaseArtifact = "framemonitor-android-no-op"

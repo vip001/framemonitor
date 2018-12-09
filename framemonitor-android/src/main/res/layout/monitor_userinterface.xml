@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginStart="6dp"
+        android:background="#000"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_flow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/monitor_bg_flow"
+            android:padding="@dimen/monitor_dimen_gap"
+            android:text="流量统计开始"
+            android:textColor="#fff"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/monitor_bg_floatball"
+        android:gravity="center"
+        android:singleLine="false"
+        android:textColor="@android:color/white">
+
+    </TextView>
+</FrameLayout>

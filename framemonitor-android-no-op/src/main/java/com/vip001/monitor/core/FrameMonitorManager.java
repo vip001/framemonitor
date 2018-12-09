@@ -81,4 +81,9 @@ public class FrameMonitorManager implements IFrameMonitorManager {
     public boolean stopFlowCal() {
         return false;
     }
+
+    @Override
+    public boolean hasStartFlowCal() {
+        return false;
+    }
 }

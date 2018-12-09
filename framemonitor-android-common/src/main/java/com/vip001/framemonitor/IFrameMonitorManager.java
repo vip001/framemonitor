@@ -33,6 +33,7 @@ public interface IFrameMonitorManager {
      */
     IFrameMonitorManager setConfig(IConfig config);
 
+
     /**
      * 获取定义卡顿的配置
      *
@@ -83,4 +84,11 @@ public interface IFrameMonitorManager {
      * @return true为成功，false为失败，失败原因可能是IPC通讯未建立
      */
     boolean stopFlowCal();
+
+    /**
+     * 是否已开启流量统计
+     *
+     * @return
+     */
+    boolean hasStartFlowCal();
 }

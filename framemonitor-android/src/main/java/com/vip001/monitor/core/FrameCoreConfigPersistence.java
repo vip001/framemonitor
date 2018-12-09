@@ -47,23 +47,35 @@ public class FrameCoreConfigPersistence {
         return mConfig;
     }
 
-    public FrameCoreConfigPersistence applyConfig(Config config) {
+    private FrameCoreConfigPersistence applyConfig(Config config) {
         if (config == null) {
             return this;
         }
-        mPreference.edit().putFloat(KEY_RED, config.redTime).putFloat(KEY_YELLOW, config.yellowTime).apply();
-
+        mPreference.edit().putFloat(KEY_RED, config.redTime)
+                .putFloat(KEY_YELLOW, config.yellowTime)
+                .putBoolean(KEY_FLOW, config.isOpen)
+                .apply();
         if (config.redTime > 0 && config.yellowTime > 0 && config.redTime > config.yellowTime) {
             mConfig = config;
         }
+        mConfig.isOpen = config.isOpen;
         return this;
     }
 
-    public FrameCoreConfigPersistence applyConfig(float redTime, float yellowTime) {
+    public FrameCoreConfigPersistence applyConfig(float redTime, float yellowTime, boolean isOpen) {
         Config config = new Config();
         config.redTime = redTime * 1000000;
         config.yellowTime = yellowTime * 1000000;
+        config.isOpen = isOpen;
         return applyConfig(config);
+    }
+
+    public void applyConfig(float redTime, float yellowTime) {
+        Config config = new Config();
+        config.redTime = redTime * 1000000;
+        config.yellowTime = yellowTime * 1000000;
+        config.isOpen = mConfig.isOpen;
+        applyConfig(config);
     }
 
     public FrameCoreConfigPersistence applyConfig(boolean isOpen) {

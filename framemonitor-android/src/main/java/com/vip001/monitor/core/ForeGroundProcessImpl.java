@@ -41,6 +41,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
     private IShowStatus mShowStatus;
     private IPCBinder mBinder;
     private IConfig mConfig;
+    private boolean hasStartFlow;
 
     ForeGroundProcessImpl() {
         mReuestShowActities = new ArrayList<>();
@@ -188,14 +189,22 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
     public boolean startFlowCal() {
         Message msg = Message.obtain();
         msg.what = MsgDef.MSG_START_FLOW;
-        return mBinder.sendMessage(msg);
+        hasStartFlow = mBinder.sendMessage(msg);
+        return hasStartFlow;
     }
 
     @Override
     public boolean stopFlowCal() {
         Message msg = Message.obtain();
         msg.what = MsgDef.MSG_END_FLOW;
-        return mBinder.sendMessage(msg);
+        boolean result = mBinder.sendMessage(msg);
+        hasStartFlow = !result;
+        return result;
+    }
+
+    @Override
+    public boolean hasStartFlowCal() {
+        return hasStartFlow;
     }
 
     @Override

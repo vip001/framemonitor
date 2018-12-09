@@ -35,7 +35,7 @@ public class ShowStatus implements IShowStatus {
         String activityName = activity.getClass().getName();
         if (mRequestShowActivities != null && mSnackBars.get(activityName) == null && mRequestShowActivities.contains(activityName)) {
             int type = SnackBarManagerType.generateType();
-            TSnackbar snackbar = TSnackbar.make(activity.getWindow().getDecorView(), new FloatBallViewHolder(activity), TSnackbar.LENGTH_INDEFINITE).show(type);
+            TSnackbar snackbar = TSnackbar.make(activity.getWindow().getDecorView(), new UserInterfaceHolder(activity), TSnackbar.LENGTH_INDEFINITE).show(type);
             mSnackBars.put(activity.getClass().getName(), snackbar);
         }
     }
@@ -43,7 +43,7 @@ public class ShowStatus implements IShowStatus {
     @Override
     public void show(Activity activity) {
         int type = SnackBarManagerType.generateType();
-        TSnackbar snackbar = TSnackbar.make(activity.getWindow().getDecorView(), new FloatBallViewHolder(activity), TSnackbar.LENGTH_INDEFINITE).show(type);
+        TSnackbar snackbar = TSnackbar.make(activity.getWindow().getDecorView(), new UserInterfaceHolder(activity), TSnackbar.LENGTH_INDEFINITE).show(type);
         mCurrentActivity = activity.getClass().getName();
         mSnackBars.put(activity.getClass().getName(), snackbar);
         updateCurrentSnackBarPos();
@@ -71,7 +71,7 @@ public class ShowStatus implements IShowStatus {
     public void onActivityPaused(Activity activity) {
         TSnackbar snackbar = mSnackBars.get(mCurrentActivity);
         if (snackbar != null) {
-            mPos = ((FloatBallViewHolder) snackbar.getHolder()).getBallPos();
+            mPos = ((UserInterfaceHolder) snackbar.getHolder()).getBallPos();
         }
     }
 
@@ -104,7 +104,7 @@ public class ShowStatus implements IShowStatus {
         if (mPos != null) {
             TSnackbar snackbar = mSnackBars.get(mCurrentActivity);
             if (snackbar != null) {
-                FloatBallViewHolder view = (FloatBallViewHolder) snackbar.getHolder();
+                UserInterfaceHolder view = (UserInterfaceHolder) snackbar.getHolder();
                 view.updateBall(mPos);
                 mPos = null;
             }

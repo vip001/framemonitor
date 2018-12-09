@@ -74,4 +74,9 @@ class BackgroundProcessImpl implements IFrameMonitorManager {
         return false;
     }
 
+    @Override
+    public boolean hasStartFlowCal() {
+        return false;
+    }
+
 }

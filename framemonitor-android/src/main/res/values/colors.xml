@@ -7,4 +7,6 @@
     <color name="monitor_help">#6a98b9</color>
     <color name="monitor_background_color">#2b2b2b</color>
     <color name="monitor_title_color">#2b2b2b</color>
+    <color name="monitor_start_flow">#7f00ff00</color>
+    <color name="monitor_end_flow">#6a98b9</color>
 </resources>

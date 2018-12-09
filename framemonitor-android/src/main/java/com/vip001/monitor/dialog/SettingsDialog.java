@@ -26,6 +26,7 @@ public class SettingsDialog extends BasicDialog {
     private EditText mEtYellow;
     private int mOriginSoftInputMode;
     private RadioGroup mFlowChoice;
+    private Callback mCallback;
 
     public SettingsDialog(@NonNull Context context) {
         super(context);
@@ -33,6 +34,11 @@ public class SettingsDialog extends BasicDialog {
 
     public SettingsDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
+    }
+
+    public SettingsDialog setCallback(Callback callback) {
+        this.mCallback = callback;
+        return this;
     }
 
     @Override
@@ -47,16 +53,6 @@ public class SettingsDialog extends BasicDialog {
         mEtRed = this.findViewById(R.id.et_red);
         mEtYellow = this.findViewById(R.id.et_yellow);
         mFlowChoice = this.findViewById(R.id.flow_container);
-        mFlowChoice.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.open) {
-                    FrameCoreConfigPersistence.getInstance().applyConfig(true);
-                } else if (checkedId == R.id.close) {
-                    FrameCoreConfigPersistence.getInstance().applyConfig(false);
-                }
-            }
-        });
         mEtYellow.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -69,7 +65,7 @@ public class SettingsDialog extends BasicDialog {
         });
         if (FrameCoreConfigPersistence.getInstance().getConfig().isOpen) {
             mFlowChoice.check(R.id.open);
-        }else{
+        } else {
             mFlowChoice.check(R.id.close);
         }
     }
@@ -79,6 +75,7 @@ public class SettingsDialog extends BasicDialog {
         mEtRed.setText("" + FormatUtils.formatStandartFrameTime(config.redTime));
         mEtRed.setSelection(mEtRed.getText().length());
         mEtYellow.setText("" + FormatUtils.formatStandartFrameTime(config.yellowTime));
+        mFlowChoice.check(config.isOpen ? R.id.open : R.id.close);
     }
 
     @Override
@@ -93,12 +90,18 @@ public class SettingsDialog extends BasicDialog {
     @Override
     public void cancel() {
         getWindow().setSoftInputMode(mOriginSoftInputMode);
+        if (mCallback != null) {
+            mCallback.onDismiss();
+        }
         super.cancel();
     }
 
     @Override
     public void dismiss() {
         getWindow().setSoftInputMode(mOriginSoftInputMode);
+        if (mCallback != null) {
+            mCallback.onDismiss();
+        }
         super.dismiss();
     }
 
@@ -116,9 +119,13 @@ public class SettingsDialog extends BasicDialog {
         try {
             float redValue = Float.parseFloat(red);
             float yellowValue = Float.parseFloat(yellow);
-            if (redValue > yellowValue) {
-                FrameCoreConfigPersistence.getInstance().applyConfig(redValue, yellowValue);
+            boolean isOpen = false;
+            if (mFlowChoice.getCheckedRadioButtonId() == R.id.open) {
+                isOpen = true;
+            } else if (mFlowChoice.getCheckedRadioButtonId() == R.id.close) {
+                isOpen = false;
             }
+            FrameCoreConfigPersistence.getInstance().applyConfig(redValue, yellowValue, isOpen);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -135,5 +142,9 @@ public class SettingsDialog extends BasicDialog {
             return false;
         }
         return decimals.matches("^\\d+(\\.\\d+)?");
+    }
+
+    public interface Callback {
+        void onDismiss();
     }
 }

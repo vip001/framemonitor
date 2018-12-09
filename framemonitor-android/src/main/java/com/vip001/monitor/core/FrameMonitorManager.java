@@ -17,7 +17,6 @@ import java.util.List;
 public class FrameMonitorManager implements IFrameMonitorManager {
     private IFrameMonitorManager mFrameMonitorManagerImpl;
     private static final FrameMonitorManager sInstance = new FrameMonitorManager();
-    private IConfig mConfig;
 
     private FrameMonitorManager() {
 
@@ -94,6 +93,11 @@ public class FrameMonitorManager implements IFrameMonitorManager {
     @Override
     public boolean stopFlowCal() {
         return mFrameMonitorManagerImpl.stopFlowCal();
+    }
+
+    @Override
+    public boolean hasStartFlowCal() {
+        return mFrameMonitorManagerImpl.hasStartFlowCal();
     }
 
 
