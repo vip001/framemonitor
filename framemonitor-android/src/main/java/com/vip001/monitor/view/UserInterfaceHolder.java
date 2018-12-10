@@ -101,7 +101,7 @@ public class UserInterfaceHolder extends SnackbarBaseViewHolder<Object> implemen
         }
     }
 
-    private void updateFlowVisible() {
+    public void updateFlowVisible() {
         if (FrameCoreConfigPersistence.getInstance().getConfig().isOpen) {
             mFlowCalView.setVisibility(View.VISIBLE);
             updateFlowText();

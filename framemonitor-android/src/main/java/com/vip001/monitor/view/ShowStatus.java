@@ -106,6 +106,7 @@ public class ShowStatus implements IShowStatus {
             if (snackbar != null) {
                 UserInterfaceHolder view = (UserInterfaceHolder) snackbar.getHolder();
                 view.updateBall(mPos);
+                view.updateFlowVisible();
                 mPos = null;
             }
 
