@@ -13,5 +13,5 @@ public interface IConfig {
     int RESULT_YELLOW = 0;
 
     int sortTime(long time);
-    
+
 }
