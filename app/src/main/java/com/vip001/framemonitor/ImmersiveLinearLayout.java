@@ -9,8 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.vip001.monitor.utils.DimentionUtils;
-
 /**
  * Created by xxd on 2018/7/19
  */
