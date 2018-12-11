@@ -60,6 +60,7 @@ public class WriteLogMessageHandler implements IMessageHandler {
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(R.mipmap.monitor_ic_launcher)
                 .setChannelId(env.applicationContext.getPackageName())
+                .setDefaults(Notification.DEFAULT_ALL)
                 .build();
         mNotificationManager.notify((int) System.currentTimeMillis(), notification);
 

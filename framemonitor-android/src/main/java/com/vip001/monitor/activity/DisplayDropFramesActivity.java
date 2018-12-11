@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -115,6 +116,8 @@ public class DisplayDropFramesActivity extends Activity {
                 mTitle.setText(String.format("Drop Frames in %s", getPackageName()));
             }
         });
+
+        NotificationManagerCompat.from(this.getApplicationContext()).cancelAll();
     }
 
     @Override
