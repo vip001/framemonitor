@@ -23,6 +23,7 @@ import com.vip001.monitor.common.ViewType;
 import com.vip001.monitor.services.stack.StackInfo;
 import com.vip001.monitor.utils.BussinessUtils;
 import com.vip001.monitor.utils.DataLoadHelper;
+import com.vip001.monitor.utils.FormatUtils;
 import com.vip001.monitor.viewholder.DropFramesDetailViewHolderFactory;
 
 import java.util.ArrayList;
@@ -65,7 +66,6 @@ public class DropFramesDetailActivity extends Activity {
                 finish();
             }
         });
-        preloadData();
         resolveIntent();
     }
 
@@ -76,7 +76,9 @@ public class DropFramesDetailActivity extends Activity {
         if (bean == null) {
             return;
         }
+        preloadData(bean);
         mTitle.setText(new StringBuilder(BussinessUtils.getDropFramesTarget(bean.dropFramesBean, true)).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
+
         mAdapter.addData(transformData(bean.listStackInfo));
         mFileName = name;
     }
@@ -93,11 +95,11 @@ public class DropFramesDetailActivity extends Activity {
         return result;
     }
 
-    public void preloadData() {
+    public void preloadData(LoadDataBean dataBean) {
         ArrayList<BaseRecyclerViewBean> beans = new ArrayList<>();
         BaseRecyclerViewBean bean = new BaseRecyclerViewBean();
         bean.type = ViewType.TYPE_TOP_ROW;
-        bean.data = getPackageName();
+        bean.data = "happensTime: " + FormatUtils.getTimeString(dataBean.dropFramesBean.happensTime);
         beans.add(bean);
 
         BaseRecyclerViewBean bean1 = new BaseRecyclerViewBean();

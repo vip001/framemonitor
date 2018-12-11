@@ -37,7 +37,7 @@ public class StackViewHolder extends BaseViewHolder<StackInfo> {
 
     @Override
     protected void initialData(int position, StackInfo data) {
-        mTitle.setText(data.timeString);
+        mTitle.setText(new StringBuilder(data.timeString).append(" interval:").append(data.intervalFromHappensTime).append("ms"));
         mDetail.setText(data.msg);
         mConnector.setType(getType(position));
     }

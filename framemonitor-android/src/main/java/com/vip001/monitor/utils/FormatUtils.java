@@ -17,6 +17,7 @@ public class FormatUtils {
 
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
     private static final SimpleDateFormat sTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private static final SimpleDateFormat sSimpleTime = new SimpleDateFormat("HH:mm:ss.SSS");
 
     public static String formatDate(Date date) {
         return sDateFormat.format(date);
@@ -26,6 +27,12 @@ public class FormatUtils {
         Date date = new Date();
         date.setTime(time);
         return sTimeFormat.format(date);
+    }
+
+    public static String getTimeString(long time) {
+        Date date = new Date();
+        date.setTime(time);
+        return sSimpleTime.format(date);
     }
 
 }

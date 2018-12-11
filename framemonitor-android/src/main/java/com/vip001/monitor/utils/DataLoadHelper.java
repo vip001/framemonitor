@@ -115,7 +115,14 @@ public class DataLoadHelper {
                         isStackStart = false;
                         bean.listStackInfo.add(stackInfo);
                     } else if (isTimeStart) {
-                        stackInfo.timeString = text;
+                        try {
+                            stackInfo.time = Long.parseLong(text);
+                            stackInfo.timeString = FormatUtils.formatTime(stackInfo.time);
+                            stackInfo.intervalFromHappensTime = bean.dropFramesBean.happensTime - stackInfo.time;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         isTimeStart = false;
                     } else if (isStackStart) {
                         stackInfo.msg.append(text).append("\r\n");

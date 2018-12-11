@@ -6,6 +6,8 @@ package com.vip001.monitor.services.stack;
 public class StackInfo {
     public StringBuilder msg;
     public long time;
+
+    public long intervalFromHappensTime;
     public String timeString;
 
     public StackInfo(StringBuilder msg) {
