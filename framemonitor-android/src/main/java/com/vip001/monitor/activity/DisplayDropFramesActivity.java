@@ -120,6 +120,9 @@ public class DisplayDropFramesActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (data == null) {
+            return;
+        }
         String filename = data.getStringExtra(BussinessUtils.KEY_DELETE_FILE);
         if (!TextUtils.isEmpty(filename)) {
             mAdapter.setData(transformData(DataLoadHelper.getInstance().getData()));
