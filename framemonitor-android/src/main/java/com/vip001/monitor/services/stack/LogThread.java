@@ -80,12 +80,7 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             return false;
         }
         StackInfo info = mMainStackCollectTask.getStacks().get(mMainStackCollectTask.getStacks().size() - 1);
-
-        if (System.currentTimeMillis() - info.time > 100) {
-            return false;
-        } else {
-            return true;
-        }
+        return System.currentTimeMillis() - info.time <= 100;
     }
 
     private void doLog() {

@@ -13,15 +13,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 public class ThreadUtils implements Executor {
-    private static ThreadUtils sInstance = new ThreadUtils();
-    private final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
+    private static final int CPU_COUNT = Runtime.getRuntime().availableProcessors();
     // We want at least 2 threads and at most 4 threads in the core pool,
     // preferring to have 1 less than the CPU count to avoid saturating
     // the CPU with background work
-    private final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
-    private final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
-    private final int KEEP_ALIVE_SECONDS = 30;
-
+    private static final int CORE_POOL_SIZE = Math.max(2, Math.min(CPU_COUNT - 1, 4));
+    private static final int MAXIMUM_POOL_SIZE = CPU_COUNT * 2 + 1;
+    private static final int KEEP_ALIVE_SECONDS = 30;
+    private static final ThreadUtils sInstance = new ThreadUtils();
     private final ThreadFactory sThreadFactory = new ThreadFactory() {
         private final AtomicInteger mCount = new AtomicInteger(1);
 

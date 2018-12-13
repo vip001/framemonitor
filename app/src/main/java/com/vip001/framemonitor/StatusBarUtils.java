@@ -48,11 +48,7 @@ public class StatusBarUtils {
         } else {
             boolean menu = ViewConfiguration.get(context).hasPermanentMenuKey();
             boolean back = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-            if (menu || back) {
-                return false;
-            } else {
-                return true;
-            }
+            return !(menu || back);
         }
     }
 
