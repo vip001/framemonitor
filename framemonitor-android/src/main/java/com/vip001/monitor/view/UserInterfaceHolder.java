@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.vip001.framemonitor.IConfig;
 import com.vip001.monitor.R;
+import com.vip001.monitor.common.StateDef;
 import com.vip001.monitor.core.FrameCoreConfigPersistence;
 import com.vip001.monitor.core.FrameMonitorManager;
 import com.vip001.monitor.dialog.SettingsDialog;
@@ -102,7 +103,7 @@ public class UserInterfaceHolder extends SnackbarBaseViewHolder<Object> implemen
     }
 
     public void updateFlowVisible() {
-        if (FrameCoreConfigPersistence.getInstance().getConfig().isOpen) {
+        if (FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_SHOW_FLOW)) {
             mFlowCalView.setVisibility(View.VISIBLE);
             updateFlowText();
         } else {

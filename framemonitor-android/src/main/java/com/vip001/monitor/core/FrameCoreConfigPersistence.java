@@ -4,21 +4,26 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.vip001.framemonitor.IConfig;
+import com.vip001.monitor.common.BaseState;
+import com.vip001.monitor.common.IState;
+import com.vip001.monitor.common.StateDef;
 
 /**
  * Created by xxd on 2018/12/2.
  */
 
-public class FrameCoreConfigPersistence {
+public class FrameCoreConfigPersistence implements IState {
     private SharedPreferences mPreference;
     private static final String KEY_RED = "60c43c46f5201cd4f79150e867464636";
     private static final String KEY_YELLOW = "e93d645782a8e15022d3e4479b1351af";
-    private static final String KEY_FLOW = "0ff43332381a4c6ceddfbab83ce508e5";
+    private static final String KEY_STATE = "b9c1ee0a78fe4a63c241ccbd7e1fb04c";
     private static final FrameCoreConfigPersistence sIntance = new FrameCoreConfigPersistence();
     private Config mConfig;
+    private BaseState mState;
+    private static final int DEFAULT_STATE = 0 | StateDef.ENABLE_SHOW_BALL;
 
     private FrameCoreConfigPersistence() {
-
+        mState = new BaseState();
     }
 
     public FrameCoreConfigPersistence init(Context context) {
@@ -33,8 +38,8 @@ public class FrameCoreConfigPersistence {
             config.redTime = IConfig.FRAME_INTERVALS * 4;
             config.yellowTime = IConfig.FRAME_INTERVALS;
         }
-        config.isOpen = mPreference.getBoolean(KEY_FLOW, false);
         mConfig = config;
+        mState.setState(mPreference.getInt(KEY_STATE, DEFAULT_STATE));
         return this;
     }
 
@@ -53,40 +58,45 @@ public class FrameCoreConfigPersistence {
         }
         mPreference.edit().putFloat(KEY_RED, config.redTime)
                 .putFloat(KEY_YELLOW, config.yellowTime)
-                .putBoolean(KEY_FLOW, config.isOpen)
                 .apply();
         if (config.redTime > 0 && config.yellowTime > 0 && config.redTime > config.yellowTime) {
             mConfig = config;
         }
-        mConfig.isOpen = config.isOpen;
         return this;
-    }
-
-    public FrameCoreConfigPersistence applyConfig(float redTime, float yellowTime, boolean isOpen) {
-        Config config = new Config();
-        config.redTime = redTime * 1000000;
-        config.yellowTime = yellowTime * 1000000;
-        config.isOpen = isOpen;
-        return applyConfig(config);
     }
 
     public void applyConfig(float redTime, float yellowTime) {
         Config config = new Config();
         config.redTime = redTime * 1000000;
         config.yellowTime = yellowTime * 1000000;
-        config.isOpen = mConfig.isOpen;
         applyConfig(config);
     }
 
-    public FrameCoreConfigPersistence applyConfig(boolean isOpen) {
-        mPreference.edit().putBoolean(KEY_FLOW, isOpen).apply();
-        mConfig.isOpen = isOpen;
-        return this;
+
+    @Override
+    public void setState(int state) {
+        mState.setState(state);
+        mPreference.edit().putInt(KEY_STATE, mState.getState()).commit();
+    }
+
+    @Override
+    public boolean hasState(int state) {
+        return mState.hasState(state);
+    }
+
+    @Override
+    public void clearState(int state) {
+        mState.clearState(state);
+        mPreference.edit().putInt(KEY_STATE, mState.getState()).commit();
+    }
+
+    @Override
+    public void resetState() {
+        mState.resetState();
     }
 
     public static class Config {
         public float redTime;
         public float yellowTime;
-        public boolean isOpen;
     }
 }

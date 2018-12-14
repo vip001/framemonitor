@@ -13,6 +13,7 @@ import com.vip001.framemonitor.IFrameMonitorManager;
 import com.vip001.monitor.bean.DropFramesBean;
 import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
+import com.vip001.monitor.common.StateDef;
 import com.vip001.monitor.services.IPCBinder;
 import com.vip001.monitor.services.stack.LogThread;
 import com.vip001.monitor.utils.DimentionUtils;
@@ -45,9 +46,8 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
 
     ForeGroundProcessImpl() {
         mReuestShowActities = new ArrayList<>();
-        //default enableshow
-        setEnableShow(true);
         mBinder = new IPCBinder();
+
     }
 
     @Override
@@ -106,6 +106,16 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
                 }
             }
         };
+        if (FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_SHOW_BALL)) {
+            setEnableShow(true);
+        }
+        if (FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_MONITOR_BACKGROUND)) {
+            setEnableBackgroundMonitor(true);
+        }
+        if (FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_MONITOR_WORK)) {
+            start();
+        }
+
         return this;
     }
 
@@ -118,6 +128,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
                 }
                 mShowStatus = new ShowStatus();
                 mShowStatus.init(mReuestShowActities, mCurrentActivity);
+                FrameCoreConfigPersistence.getInstance().setState(StateDef.ENABLE_SHOW_BALL);
             }
         } else {
             if (!(mShowStatus instanceof DisableShowStatus)) {
@@ -126,6 +137,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
                 }
                 mShowStatus = new DisableShowStatus();
                 mShowStatus.init(mReuestShowActities, mCurrentActivity);
+                FrameCoreConfigPersistence.getInstance().clearState(StateDef.ENABLE_SHOW_BALL);
             }
         }
         return this;
@@ -154,6 +166,7 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         if (mShowStatus != null && mShowStatus instanceof ShowStatus) {
             mShowStatus.init(mReuestShowActities, mCurrentActivity);
         }
+        FrameCoreConfigPersistence.getInstance().setState(StateDef.ENABLE_MONITOR_WORK);
         return this;
     }
 
@@ -176,12 +189,18 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
         setEnableShow(false);
         //flag
         hasStart = false;
+        FrameCoreConfigPersistence.getInstance().clearState(StateDef.ENABLE_MONITOR_WORK);
         return this;
     }
 
     @Override
     public IFrameMonitorManager setEnableBackgroundMonitor(boolean enableBackgroundMonitor) {
         this.enableBackgroundMonitor = enableBackgroundMonitor;
+        if (enableBackgroundMonitor) {
+            FrameCoreConfigPersistence.getInstance().setState(StateDef.ENABLE_MONITOR_BACKGROUND);
+        } else {
+            FrameCoreConfigPersistence.getInstance().clearState(StateDef.ENABLE_MONITOR_BACKGROUND);
+        }
         return this;
     }
 

@@ -15,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.vip001.monitor.R;
+import com.vip001.monitor.common.StateDef;
 import com.vip001.monitor.core.FrameCoreConfigPersistence;
 import com.vip001.monitor.utils.FormatUtils;
 
@@ -63,7 +64,7 @@ public class SettingsDialog extends BasicDialog {
                 return false;
             }
         });
-        if (FrameCoreConfigPersistence.getInstance().getConfig().isOpen) {
+        if (FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_SHOW_FLOW)) {
             mFlowChoice.check(R.id.open);
         } else {
             mFlowChoice.check(R.id.close);
@@ -75,7 +76,7 @@ public class SettingsDialog extends BasicDialog {
         mEtRed.setText("" + FormatUtils.formatStandartFrameTime(config.redTime));
         mEtRed.setSelection(mEtRed.getText().length());
         mEtYellow.setText("" + FormatUtils.formatStandartFrameTime(config.yellowTime));
-        mFlowChoice.check(config.isOpen ? R.id.open : R.id.close);
+        mFlowChoice.check(FrameCoreConfigPersistence.getInstance().hasState(StateDef.ENABLE_SHOW_FLOW) ? R.id.open : R.id.close);
     }
 
     @Override
@@ -119,13 +120,12 @@ public class SettingsDialog extends BasicDialog {
         try {
             float redValue = Float.parseFloat(red);
             float yellowValue = Float.parseFloat(yellow);
-            boolean isOpen = false;
             if (mFlowChoice.getCheckedRadioButtonId() == R.id.open) {
-                isOpen = true;
+                FrameCoreConfigPersistence.getInstance().setState(StateDef.ENABLE_SHOW_FLOW);
             } else if (mFlowChoice.getCheckedRadioButtonId() == R.id.close) {
-                isOpen = false;
+                FrameCoreConfigPersistence.getInstance().clearState(StateDef.ENABLE_SHOW_FLOW);
             }
-            FrameCoreConfigPersistence.getInstance().applyConfig(redValue, yellowValue, isOpen);
+            FrameCoreConfigPersistence.getInstance().applyConfig(redValue, yellowValue);
         } catch (Exception e) {
             e.printStackTrace();
         }
