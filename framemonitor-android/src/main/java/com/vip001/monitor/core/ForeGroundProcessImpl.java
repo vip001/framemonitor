@@ -244,12 +244,12 @@ class ForeGroundProcessImpl implements FrameCore.FrameCoreCallback, Application.
 
     @Override
     public void update(long ns) {
+        if (canExecStatus()) {
+            mShowStatus.update(ns);
+        }
         if (mConfig.sortTime(ns) == IConfig.RESULT_RED && mLogThread != null && mLogThread.canWriteLog()) {
             saveDropFramesBean(ns);
             mLogThread.writeLog();
-        }
-        if (canExecStatus()) {
-            mShowStatus.update(ns);
         }
 
     }

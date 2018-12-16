@@ -25,6 +25,8 @@ public class MainStackCollectTask implements Runnable {
         sFilterStack.add("android.view.ThreadedRenderer.nFence(Native Method)");
         sFilterStack.add("android.view.GraphicBuffer.nReadGraphicBufferFromParcel(Native Method)");
         sFilterStack.add("android.os.BinderProxy.transact(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nPauseSurface(Native Method)");
+        sFilterStack.add("android.view.ThreadedRenderer.nDestroyHardwareResources(Native Method)");
     }
 
     private Handler mLaucherHandler;

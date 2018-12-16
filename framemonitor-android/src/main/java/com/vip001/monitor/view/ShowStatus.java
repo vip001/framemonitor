@@ -54,7 +54,7 @@ public class ShowStatus implements IShowStatus {
         TSnackbar snackbar = mSnackBars.get(mCurrentActivity);
         if (snackbar != null) {
             long currentTime = System.currentTimeMillis();
-            if (currentTime - mLastUpdateTime > 100) {
+            if (currentTime - mLastUpdateTime > 50) {
                 snackbar.setData(ns);
                 mLastUpdateTime = currentTime;
             }

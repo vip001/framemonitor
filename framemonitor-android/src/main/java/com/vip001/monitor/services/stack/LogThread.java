@@ -28,7 +28,7 @@ public class LogThread extends HandlerThread implements Handler.Callback {
     private MainStackCollectTask mMainStackCollectTask;
     private boolean isWrite;
     private static final String TAG = "FrameMonitor";
-    private static final long INTERVAL_WRITE_LOG = 5 * 1000;
+    private static final long INTERVAL_WRITE_LOG = 2 * 1000;
     private static final int MSG_WRITE_LOG = 1;
     private Callback mCallback;
 
@@ -66,13 +66,7 @@ public class LogThread extends HandlerThread implements Handler.Callback {
     }
 
     public boolean canWriteLog() {
-        long currentTime = System.currentTimeMillis();
-        if (!isWrite && currentTime - mLastWriteTime > INTERVAL_WRITE_LOG) {
-            mLastWriteTime = currentTime;
-            return true;
-        } else {
-            return false;
-        }
+        return !isWrite && System.currentTimeMillis() - mLastWriteTime > INTERVAL_WRITE_LOG;
     }
 
     private boolean canDoLog() {
@@ -80,17 +74,20 @@ public class LogThread extends HandlerThread implements Handler.Callback {
             return false;
         }
         StackInfo info = mMainStackCollectTask.getStacks().get(mMainStackCollectTask.getStacks().size() - 1);
-        return System.currentTimeMillis() - info.time <= 100;
+        long result1 = DropFramesBean.getInstance().happensTime - info.time;
+        long result2 = DropFramesBean.getInstance().happensTime - mMainStackCollectTask.getStacks().get(mMainStackCollectTask.getStacks().size() - 2).time;
+        long result3 = DropFramesBean.getInstance().happensTime - mMainStackCollectTask.getStacks().get(mMainStackCollectTask.getStacks().size() - 3).time;
+        return result1 > 0 && result1 <= 100 && result2 < 1000 && result3 < 1000;
     }
 
     private void doLog() {
         isWrite = true;
         try {
-
             if (!canDoLog()) {
                 Log.i(TAG, "abort write stacks!invalid dropframes!");
                 return;
             }
+            mLastWriteTime = System.currentTimeMillis();
             File file = new File(mParentFile, FormatUtils.formatDate(new Date()));
             if (!file.exists()) {
                 file.createNewFile();
