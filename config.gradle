@@ -1,11 +1,11 @@
 def configs = [:]
-configs.version = "2.0.0"
-configs.dryRun = "true"
+configs.version = "2.0.1"
+configs.dryRun = "false"
 configs.group = "com.github.vip001"
 configs.releaseArtifact = "framemonitor-android-no-op"
 configs.debugArtifact = "framemonitor-android"
 configs.commonArtifact = "framemonitor-android-common"
-configs.keyPath = "/Users/mango/privatekey/key.properties"
+configs.keyPath = "/Users/yes/privatekey/key.properties"
 allprojects {
     version = configs.version
     group = configs.group

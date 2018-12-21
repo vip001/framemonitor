@@ -10,6 +10,7 @@ import android.os.Message;
 import android.os.Messenger;
 import android.util.Log;
 
+import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
 import com.vip001.monitor.services.flow.FlowMessageHandler;
 
@@ -53,6 +54,7 @@ public class RemoteBackgroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        FileManager.getInstance().init(getApplication());
         initEnv();
         initMessageHandler();
     }

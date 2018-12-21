@@ -4,7 +4,7 @@
     <application>
         <service
             android:name="com.vip001.monitor.services.RemoteBackgroundService"
-            android:process=":remote"></service>
+            android:process=":framemonitor"></service>
 
         <activity
             android:name="com.vip001.monitor.activity.DropFramesDetailActivity"
