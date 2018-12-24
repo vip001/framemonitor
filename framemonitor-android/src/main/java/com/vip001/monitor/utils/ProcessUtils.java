@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Process;
 
+import com.vip001.monitor.BuildConfig;
+
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class ProcessUtils {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> infos = activityManager.getRunningAppProcesses();
         String foregroundProcessName = context.getPackageName();
-        String backgroundProcessName = new StringBuilder(foregroundProcessName).append(":remote").toString();
+        String backgroundProcessName = new StringBuilder(foregroundProcessName).append(BuildConfig.BACKGROUND_PROCESS_NAME).toString();
         for (ActivityManager.RunningAppProcessInfo info : infos) {
             if (info.pid == Process.myPid()) {
                 if (foregroundProcessName.equals(info.processName)) {

@@ -4,12 +4,12 @@
     <application>
         <service
             android:name="com.vip001.monitor.services.RemoteBackgroundService"
-            android:process=":framemonitor"></service>
+            android:process="${BACKGROUND_PROCESS_NAME}"></service>
 
         <activity
             android:name="com.vip001.monitor.activity.DropFramesDetailActivity"
             android:launchMode="singleTop"
-            android:process=":remote"
+            android:process="${BACKGROUND_PROCESS_NAME}"
             android:taskAffinity="com.vip001.monitor.${applicationId}">
 
         </activity>
@@ -18,7 +18,7 @@
             android:icon="@mipmap/monitor_ic_launcher"
             android:label="dropframes"
             android:launchMode="singleTask"
-            android:process=":remote"
+            android:process="${BACKGROUND_PROCESS_NAME}"
             android:taskAffinity="com.vip001.monitor.${applicationId}">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

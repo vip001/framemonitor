@@ -30,6 +30,7 @@ class BackgroundProcessImpl implements IFrameMonitorManager {
 
     @Override
     public IFrameMonitorManager init(Application application) {
+        FileManager.getInstance().init(application);
         return this;
     }
 

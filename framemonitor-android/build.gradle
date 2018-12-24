@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
+def BACKGROUND_PROCESS_NAME = ":framemonitor"
 android {
     compileSdkVersion 27
 
@@ -10,7 +11,8 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-
+        manifestPlaceholders = ["BACKGROUND_PROCESS_NAME": "${BACKGROUND_PROCESS_NAME}"]
+        buildConfigField "String", "BACKGROUND_PROCESS_NAME", "\"${BACKGROUND_PROCESS_NAME}\""
 
     }
 
