@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.vip001.framemonitor">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".ExApplication"
         android:allowBackup="true"
@@ -18,10 +20,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".exam.Example1Activity"></activity>
-        <activity android:name=".exam.Example2Activity"></activity>
+        <activity android:name=".exam.Example1Activity" />
+        <activity android:name=".exam.Example2Activity" />
+        <activity android:name=".exam.Example4Activity" />
         <activity android:name=".exam.Example3Activity"></activity>
-
     </application>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
 </manifest>

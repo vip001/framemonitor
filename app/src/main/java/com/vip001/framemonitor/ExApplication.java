@@ -28,6 +28,16 @@ public class ExApplication extends Application {
             public boolean stopWhenDebugging() {
                 return false;
             }
+
+            @Override
+            public int provideBlockThreshold() {
+                return 3000;
+            }
+
+            @Override
+            public int provideDumpInterval() {
+                return 50;
+            }
         }).start();
     }
 
