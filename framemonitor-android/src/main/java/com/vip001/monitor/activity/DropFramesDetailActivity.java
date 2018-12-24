@@ -77,7 +77,7 @@ public class DropFramesDetailActivity extends Activity {
             return;
         }
         preloadData(bean);
-        mTitle.setText(new StringBuilder(BussinessUtils.getDropFramesTarget(bean.dropFramesBean, true)).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS).append(" frames"));
+        mTitle.setText(new StringBuilder(BussinessUtils.getDropFramesTarget(bean.dropFramesBean, true)).append(" drop ").append(bean.dropFramesBean.frameCostTime / IConfig.FRAME_INTERVALS - 1).append(" frames"));
 
         mAdapter.addData(transformData(bean.listStackInfo));
         mFileName = name;
