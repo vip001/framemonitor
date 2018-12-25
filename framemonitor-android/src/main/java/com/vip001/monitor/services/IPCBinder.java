@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Build;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -46,7 +47,11 @@ public class IPCBinder implements ServiceConnection {
         }
         mContext = context.getApplicationContext();
         Intent intent = new Intent(mContext, RemoteBackgroundService.class);
-        context.startService(intent);
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            context.startForegroundService(intent);
+        }else{
+            context.startService(intent);
+        }
         context.bindService(intent, this, Context.BIND_AUTO_CREATE);
     }
 
