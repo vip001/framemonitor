@@ -17,8 +17,8 @@ allprojects {
 <strong>In  build.gradle(Module)</strong>
 ```gradle
 dependencies {
-     debugImplementation 'com.github.vip001:framemonitor-android:1.0.0'
-     releaseImplementation 'com.github.vip001:framemonitor-android-no-op:1.0.0'
+     debugImplementation 'com.github.vip001:framemonitor-android:2.0.2'
+     releaseImplementation 'com.github.vip001:framemonitor-android-no-op:2.0.2'
 }
 ```
 <strong>In Application</strong>
@@ -42,12 +42,19 @@ public class BaseActivity extends Activity {
 }
 </code></pre>
 # How does it work?
-Blog in Chinese：[FrameMonitor](https://www.jianshu.com/p/9f200016d309)
+Blog in Chinese：[FrameMonitor](https://www.jianshu.com/p/9f200016d309)<br/>
 Principle flow picture:
 ![flow](https://github.com/vip001/framemonitor/blob/master/instruction/framemonitor_principle.png)
 # Screenshot
-![screenshot1](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png)<div style="height:60px;line-height:60px"><strong>when double click the float ball</strong>![screenshot2](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png)</div>
-![screenshot3](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png)![screenshot4](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png)
+<figure class="half">
+    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png">
+    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png">
+</figure>
+<figure class="third">
+    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png">
+    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png">
+    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot5.png">
+</figure>
 # Donation
 If you find this repository helpful, you may make a donation to me via alipay or wechat.
 ![alipay](https://github.com/vip001/framemonitor/blob/master/instruction/alipay.png) 
@@ -58,7 +65,7 @@ Check [CHANGELOG](https://github.com/vip001/framemonitor/blob/master/CHANGELOG.m
 
 # Contribute
 
-If you would like to contribute code to BlockCanary you can do so through GitHub by forking the repository and sending a pull request.
+If you would like to contribute code to FrameMonitor you can do so through GitHub by forking the repository and sending a pull request.
 
 # License
 
