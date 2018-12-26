@@ -46,11 +46,8 @@ Blog in Chinese：[FrameMonitor](https://www.jianshu.com/p/9f200016d309)
 Principle flow picture:
 ![flow](https://github.com/vip001/framemonitor/blob/master/instruction/framemonitor_principle.png)
 # Screenshot
-![screenshot1](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png)
-<strong>when double click the float ball</strong>
-![screenshot2](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png)
-![screenshot3](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png)
-![screenshot4](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png)
+![screenshot1](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png)<div style="height:60px;line-height:60px"><strong>when double click the float ball</strong>![screenshot2](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png)</div>
+![screenshot3](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png)![screenshot4](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png)
 # Donation
 If you find this repository helpful, you may make a donation to me via alipay or wechat.
 ![alipay](https://github.com/vip001/framemonitor/blob/master/instruction/alipay.png) 
