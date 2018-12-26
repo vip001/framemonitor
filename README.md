@@ -1,6 +1,11 @@
+[Chinese README](https://github.com/vip001/framemonitor/blob/master/README_CN.md)
+
 # Brief
+
 FrameMonitor is a transparent ui-block detection library for Android,can also detect the consumed traffic, ui part refers to the leakcanary, readme documentation refers to the blockcanary
+
 # Getting started
+
 <strong>In  build.gradle(Project)</strong>
 ```gradle
 buildscript {
@@ -41,27 +46,34 @@ public class BaseActivity extends Activity {
     }
 }
 </code></pre>
+
 # How does it work?
+
 Blog in Chinese：[FrameMonitor](https://www.jianshu.com/p/9f200016d309)<br/>
-Principle flow picture:
+Principle flow picture:<br/><br/>
 ![flow](https://github.com/vip001/framemonitor/blob/master/instruction/framemonitor_principle.png)
+
 # Screenshot
-<figure class="half">
-    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png">
-    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png">
-</figure>
-<figure class="third">
-    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png">
-    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png">
-    <img src="https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot5.png">
-</figure>
-# Donation
-If you find this repository helpful, you may make a donation to me via alipay or wechat.
-![alipay](https://github.com/vip001/framemonitor/blob/master/instruction/alipay.png) 
-![wechat](https://github.com/vip001/framemonitor/blob/master/instruction/weixin.png)
+
+![screenshot1](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot1.png)
+&nbsp;&nbsp;&nbsp;&nbsp;
+![screenshot2](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot2.png)
+<br/><br/>
+![screenshot3](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot3.png)
+&nbsp;&nbsp;&nbsp;&nbsp;
+![screenshot4](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot4.png)
+&nbsp;&nbsp;&nbsp;&nbsp;
+![screenshot5](https://github.com/vip001/framemonitor/blob/master/instruction/Screenshot5.png)
+
 # Versions
 
 Check [CHANGELOG](https://github.com/vip001/framemonitor/blob/master/CHANGELOG.md)
+
+# Donation
+
+If you find this repository helpful, you may make a donation to me via alipay or wechat.<br/>
+![alipay](https://github.com/vip001/framemonitor/blob/master/instruction/alipay.png) 
+![wechat](https://github.com/vip001/framemonitor/blob/master/instruction/weixin.png)
 
 # Contribute
 
