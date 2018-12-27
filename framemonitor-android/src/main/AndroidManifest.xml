@@ -5,6 +5,11 @@
         <service
             android:name="com.vip001.monitor.services.RemoteBackgroundService"
             android:process="${BACKGROUND_PROCESS_NAME}"></service>
+        <service
+            android:name="com.vip001.monitor.services.RemoteBackgroundService$InnerService"
+            android:process="${BACKGROUND_PROCESS_NAME}">
+
+        </service>
 
         <activity
             android:name="com.vip001.monitor.activity.DropFramesDetailActivity"

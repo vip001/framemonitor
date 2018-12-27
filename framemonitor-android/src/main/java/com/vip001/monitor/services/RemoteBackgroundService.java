@@ -8,11 +8,13 @@ import android.os.IBinder;
 import android.os.Looper;
 import android.os.Message;
 import android.os.Messenger;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
 import com.vip001.monitor.services.flow.FlowMessageHandler;
+import com.vip001.monitor.utils.ServiceStartUtils;
 
 import java.util.ArrayList;
 
@@ -21,6 +23,7 @@ import java.util.ArrayList;
  */
 public class RemoteBackgroundService extends Service {
     private static final String TAG = "RemoteBackgroundService";
+    private volatile static Service mInstance;
     private ArrayList<IMessageHandler> mMessageHandlers;
     private Env mEnv;
     private Handler mForegroundMsgHandler = new Handler(Looper.getMainLooper()) {
@@ -54,11 +57,18 @@ public class RemoteBackgroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        mInstance = this;
         FileManager.getInstance().init(getApplication());
+        ServiceStartUtils.startService(this, new Intent(RemoteBackgroundService.this, InnerService.class));
         initEnv();
         initMessageHandler();
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mInstance = null;
+    }
 
     private void initEnv() {
         mEnv = new Env();
@@ -87,5 +97,20 @@ public class RemoteBackgroundService extends Service {
     public static class Env {
         public Messenger sender;
         public Context applicationContext;
+    }
+
+    public static class InnerService extends Service {
+
+        @Nullable
+        @Override
+        public IBinder onBind(Intent intent) {
+            return null;
+        }
+
+        @Override
+        public int onStartCommand(Intent intent, int flags, int startId) {
+            ServiceStartUtils.setForeground(mInstance, this);
+            return START_NOT_STICKY;
+        }
     }
 }

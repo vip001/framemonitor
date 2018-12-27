@@ -14,6 +14,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.vip001.monitor.common.MsgDef;
+import com.vip001.monitor.utils.ServiceStartUtils;
 
 import java.util.UUID;
 
@@ -47,12 +48,8 @@ public class IPCBinder implements ServiceConnection {
         }
         mContext = context.getApplicationContext();
         Intent intent = new Intent(mContext, RemoteBackgroundService.class);
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            context.startForegroundService(intent);
-        }else{
-            context.startService(intent);
-        }
-        context.bindService(intent, this, Context.BIND_AUTO_CREATE);
+        ServiceStartUtils.startService(mContext, intent);
+        mContext.bindService(intent, this, Context.BIND_AUTO_CREATE);
     }
 
     public void stop() {
@@ -102,7 +99,7 @@ public class IPCBinder implements ServiceConnection {
 
     @Override
     public void onServiceDisconnected(ComponentName name) {
-        Log.i(TAG, "IPCBinder onServiceConnected");
+        Log.i(TAG, "IPCBinder onServiceDisconnected");
         isConnected = false;
         connect(mContext);
 
