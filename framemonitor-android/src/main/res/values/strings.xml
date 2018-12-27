@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CoreLibrary</string>
+    <string name="app_name">framemonitor</string>
     <string name="monitor_help_title">Tap here to learn more</string>
     <string name="monitor_help_detail"><![CDATA[When the frame drawing time exceeds 16ms, the frame is dropped.
     When the frame is dropped to a certain level, the user will be visually stuck.

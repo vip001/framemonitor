@@ -22,8 +22,8 @@ allprojects {
 <strong>In  build.gradle(Module)</strong>
 ```gradle
 dependencies {
-     debugImplementation 'com.github.vip001:framemonitor-android:2.0.2'
-     releaseImplementation 'com.github.vip001:framemonitor-android-no-op:2.0.2'
+     debugImplementation 'com.github.vip001:framemonitor-android:2.0.3'
+     releaseImplementation 'com.github.vip001:framemonitor-android-no-op:2.0.3'
 }
 ```
 <strong>In Application</strong>

@@ -14,6 +14,9 @@ You can watch releases [on Jcenter](https://dl.bintray.com/xiexudong/framemonito
 ### 2.0.2 *(2018-12-25)*
 - bugfix
 
+### 2.0.3 *(2018-12-27)*
+- bugfix
+
 ## Version 1.0 *(2018-09-14)*
 - frame drawing time detection
 - small ball floating window display (no need for floating window permission)
