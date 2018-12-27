@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">CoreLibrary</string>
+    <string name="monitor_help_title">Tap here to learn more</string>
+    <string name="monitor_help_detail"><![CDATA[帧绘制时间超过16ms时，即发生了掉帧，但掉帧到一定程度时，会引起用户视觉上的卡顿，
+    这时候小圆球会变红，会有通知提示，重新进入该界面可以看到收集到的堆栈信息。如果默认的堆栈收集收集时机的配置不能反映视觉上的卡顿，
+    可以双击小圆球打开设置对话框进行设置。设置对话框除了有堆栈的收集设置，还有流量检测的开关设置，欢迎使用。如果遇到问题，可以在github上提issue。
+    <br/>
+    单击条目可以看到详情，再次单击合上
+]]></string>
+    <string name="monitor_delete_all_dropframes_title">Are you sure you want to delete all drop frames ?</string>
+    <string name="monitor_delete_all">Delete all</string>
+</resources>
