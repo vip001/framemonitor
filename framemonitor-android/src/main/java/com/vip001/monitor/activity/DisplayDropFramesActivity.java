@@ -19,6 +19,7 @@ import com.vip001.monitor.bean.DropFramesBean;
 import com.vip001.monitor.bean.LoadDataBean;
 import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.ViewType;
+import com.vip001.monitor.core.FrameMonitorManager;
 import com.vip001.monitor.dialog.DeleteDialog;
 import com.vip001.monitor.utils.BussinessUtils;
 import com.vip001.monitor.utils.DataLoadHelper;
@@ -46,6 +47,7 @@ public class DisplayDropFramesActivity extends Activity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
         setContentView(R.layout.monitor_layout_drop_frames);
+        FrameMonitorManager.getInstance().init(this.getApplication());
         mTitle = this.findViewById(R.id.title);
         mRecycelerView = this.findViewById(R.id.reyclerview);
         mDelete = this.findViewById(R.id.action);

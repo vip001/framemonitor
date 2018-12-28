@@ -11,8 +11,8 @@ import android.os.Messenger;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.vip001.monitor.common.FileManager;
 import com.vip001.monitor.common.MsgDef;
+import com.vip001.monitor.core.FrameMonitorManager;
 import com.vip001.monitor.services.flow.FlowMessageHandler;
 import com.vip001.monitor.utils.ServiceStartUtils;
 
@@ -58,7 +58,7 @@ public class RemoteBackgroundService extends Service {
     public void onCreate() {
         super.onCreate();
         mInstance = this;
-        FileManager.getInstance().init(getApplication());
+        FrameMonitorManager.getInstance().init(this.getApplication());
         ServiceStartUtils.startService(this, new Intent(RemoteBackgroundService.this, InnerService.class));
         initEnv();
         initMessageHandler();
