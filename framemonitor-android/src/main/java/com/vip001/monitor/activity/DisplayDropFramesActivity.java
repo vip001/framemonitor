@@ -79,6 +79,16 @@ public class DisplayDropFramesActivity extends Activity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mAdapter.getItemCount() > 0) {
+            mDelete.setVisibility(View.VISIBLE);
+        } else {
+            mDelete.setVisibility(View.GONE);
+        }
+    }
+
     private void clearData() {
         mAdapter.clearData();
         DataLoadHelper.getInstance().clearData();
