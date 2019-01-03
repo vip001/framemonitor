@@ -23,22 +23,7 @@ public class ExApplication extends Application {
         if (!isMainProcess()) {
             return;
         }
-        BlockCanary.install(this, new BlockCanaryContext() {
-            @Override
-            public boolean stopWhenDebugging() {
-                return false;
-            }
-
-            @Override
-            public int provideBlockThreshold() {
-                return 3000;
-            }
-
-            @Override
-            public int provideDumpInterval() {
-                return 50;
-            }
-        }).start();
+        BlockCanary.install(this, new BlockCanaryContext()).start();
     }
 
     private boolean isMainProcess() {
