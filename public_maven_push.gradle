@@ -10,7 +10,7 @@ def _defineMavenPubish(String artifactName) {
     loadConfig()
     publish {
         userOrg = this.project.bintrayUser//bintray用户名
-        repoName = 'framemonitor'//要传到的maven的名字。你可能有多个maven，要传哪个写哪个。
+        repoName = this.repositoryname//要传到的maven的名字。你可能有多个maven，要传哪个写哪个。
         groupId = this.group//jcenter上的路径
         artifactId = artifactName//项目名称
         publishVersion = this.version//版本号

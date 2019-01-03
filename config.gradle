@@ -1,11 +1,12 @@
 def configs = [:]
 configs.version = "2.0.3"
 configs.dryRun = "false"
-configs.group = "com.github.vip001"
+configs.group = "com.github.vip001.snapshot"
 configs.releaseArtifact = "framemonitor-android-no-op"
 configs.debugArtifact = "framemonitor-android"
 configs.commonArtifact = "framemonitor-android-common"
 configs.keyPath = "/Users/yes/privatekey/key.properties"
+configs.repositoryname="framemonitor-snapshot"
 allprojects {
     version = configs.version
     group = configs.group
@@ -15,3 +16,4 @@ ext.releaseArtifact = configs.releaseArtifact
 ext.debugArtifact = configs.debugArtifact
 ext.commonArtifact = configs.commonArtifact
 ext.keyPath = configs.keyPath
+ext.repositoryname=configs.repositoryname
