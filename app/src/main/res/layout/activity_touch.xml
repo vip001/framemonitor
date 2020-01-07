@@ -12,33 +12,31 @@
         android:layout_height="48dp"
         android:background="#171220"
         android:gravity="center"
-        android:text="流量统计"
+        android:text="属性动画卡顿"
         android:textColor="#fff"
         android:textSize="17dp"
         android:textStyle="bold" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:src="@mipmap/ic_launcher"></ImageView>
+
     <Button
-        android:id="@+id/start"
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="开始流量统计" />
+        android:layout_marginTop="15dp"
+        android:text="开启掉帧" />
 
     <Button
         android:id="@+id/stop"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="结束流量统计" />
-    <Button
-        android:id="@+id/printer"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="检测是否同一个Printer" />
-    <WebView
-        android:id="@+id/webview"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_marginTop="15dp"
+        android:text="停止检测" />
+
 </com.vip001.framemonitor.ImmersiveLinearLayout>

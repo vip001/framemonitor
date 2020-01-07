@@ -8,6 +8,7 @@ import com.vip001.framemonitor.exam.Example1Activity;
 import com.vip001.framemonitor.exam.Example2Activity;
 import com.vip001.framemonitor.exam.Example3Activity;
 import com.vip001.framemonitor.exam.Example4Activity;
+import com.vip001.framemonitor.exam.Example5Activity;
 
 public class MainActivity extends BaseActivity {
 
@@ -44,5 +45,14 @@ public class MainActivity extends BaseActivity {
                 MainActivity.this.startActivity(intent);
             }
         });
+        this.findViewById(R.id.exam5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Example5Activity.class);
+                MainActivity.this.startActivity(intent);
+            }
+        });
+
+
     }
 }

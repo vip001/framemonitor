@@ -24,6 +24,7 @@ public class ExApplication extends Application {
             return;
         }
         BlockCanary.install(this, new BlockCanaryContext()).start();
+        FrameMonitorUtils.mLastPrinter = FrameMonitorUtils.getMessageLogging();
     }
 
     private boolean isMainProcess() {

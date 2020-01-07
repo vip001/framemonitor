@@ -40,12 +40,20 @@
         android:layout_marginTop="25dp"
         android:text="Animation卡顿"
         android:textSize="15dp" />
-
     <Button
         android:id="@+id/exam4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:text="触摸事件引发的卡顿"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/exam5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:text="流量统计"
         android:textSize="15dp" />
+
 </com.vip001.framemonitor.ImmersiveLinearLayout>
