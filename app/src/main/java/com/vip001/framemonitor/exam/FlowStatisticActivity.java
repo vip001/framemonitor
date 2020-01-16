@@ -17,7 +17,7 @@ import com.vip001.monitor.core.FrameMonitorManager;
 /**
  * Created by xxd on 2018/8/14
  */
-public class Example5Activity extends BaseActivity {
+public class FlowStatisticActivity extends BaseActivity {
     private Button mStopBtn;
     private Button mStartBtn;
     private WebView mWebView;

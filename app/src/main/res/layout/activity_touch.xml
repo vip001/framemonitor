@@ -12,7 +12,7 @@
         android:layout_height="48dp"
         android:background="#171220"
         android:gravity="center"
-        android:text="属性动画卡顿"
+        android:text="触摸卡顿"
         android:textColor="#fff"
         android:textSize="17dp"
         android:textStyle="bold" />

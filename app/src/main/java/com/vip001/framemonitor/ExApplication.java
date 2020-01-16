@@ -19,11 +19,18 @@ public class ExApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        FrameMonitorManager.getInstance().init(this).start();
+
+
         if (!isMainProcess()) {
             return;
         }
-        BlockCanary.install(this, new BlockCanaryContext()).start();
+        FrameMonitorManager.getInstance().init(this).start();
+        BlockCanary.install(this, new BlockCanaryContext(){
+            @Override
+            public int provideBlockThreshold() {
+                return (int) (IConfig.FRAME_INTERVALS * 8)/1000000;
+            }
+        }).start();
         FrameMonitorUtils.mLastPrinter = FrameMonitorUtils.getMessageLogging();
     }
 

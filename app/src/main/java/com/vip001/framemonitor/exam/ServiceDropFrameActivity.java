@@ -1,31 +1,37 @@
 package com.vip001.framemonitor.exam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import com.vip001.framemonitor.BaseActivity;
-import com.vip001.framemonitor.ExampleApdater;
 import com.vip001.framemonitor.JANKSwitch;
 import com.vip001.framemonitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
 
 /**
- * Created by xxd on 2018/8/14
+ * @author xxd
+ * @date 2020-01-16
  */
-public class Example1Activity extends BaseActivity {
+public class ServiceDropFrameActivity extends BaseActivity {
+
     private Button mJANKBtn;
     private Button mStartBtn;
-    private ListView mListView;
+    private Button mStartServiceBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-        JANKSwitch.DEBUG_JANK = false;
-        mJANKBtn = (Button) this.findViewById(R.id.btn);
-        mStartBtn = (Button) this.findViewById(R.id.start);
+        setContentView(R.layout.activity_service);
+        mStartServiceBtn = this.findViewById(R.id.btn_startservice);
+        mStartBtn = this.findViewById(R.id.stop);
+        mStartBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,8 +43,10 @@ public class Example1Activity extends BaseActivity {
                 updateStartText();
             }
         });
-        mListView = (ListView) this.findViewById(R.id.list);
-        mListView.setAdapter(new ExampleApdater());
+
+
+        mJANKBtn = (Button) this.findViewById(R.id.btn);
+
         mJANKBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,8 +54,22 @@ public class Example1Activity extends BaseActivity {
                 updateJANKText();
             }
         });
+        mStartServiceBtn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ServiceDropFrameActivity.this, DropFrameService.class);
+                ServiceDropFrameActivity.this.startService(intent);
+
+            }
+        });
         updateJANKText();
         updateStartText();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 
     private void updateJANKText() {

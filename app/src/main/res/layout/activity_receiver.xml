@@ -12,18 +12,18 @@
         android:layout_height="48dp"
         android:background="#171220"
         android:gravity="center"
-        android:text="属性动画卡顿"
+        android:text="Receiver卡顿"
         android:textColor="#fff"
         android:textSize="17dp"
         android:textStyle="bold" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="发送广播"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        android:src="@mipmap/ic_launcher"></ImageView>
+        android:layout_marginTop="15dp"></Button>
 
     <Button
         android:id="@+id/btn"

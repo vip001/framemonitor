@@ -1,45 +1,31 @@
 package com.vip001.framemonitor.exam;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ListView;
 
 import com.vip001.framemonitor.BaseActivity;
+import com.vip001.framemonitor.ExampleApdater;
 import com.vip001.framemonitor.JANKSwitch;
 import com.vip001.framemonitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
 
 /**
- * @author xxd
- * @date 2020-01-07
+ * Created by xxd on 2018/8/14
  */
-public class Example4Activity extends BaseActivity {
-    private ImageView mImageView;
+public class ListPageSlideDropFrameActivity extends BaseActivity {
     private Button mJANKBtn;
     private Button mStartBtn;
+    private ListView mListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_touch);
-        mImageView = this.findViewById(R.id.imageView);
-        mImageView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if(JANKSwitch.DEBUG_JANK){
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return true;
-            }
-        });
-        mStartBtn = this.findViewById(R.id.stop);
+        setContentView(R.layout.activity_list_page);
+        JANKSwitch.DEBUG_JANK = false;
+        mJANKBtn = (Button) this.findViewById(R.id.btn);
+        mStartBtn = (Button) this.findViewById(R.id.start);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,10 +37,8 @@ public class Example4Activity extends BaseActivity {
                 updateStartText();
             }
         });
-
-
-        mJANKBtn = (Button) this.findViewById(R.id.btn);
-
+        mListView = (ListView) this.findViewById(R.id.list);
+        mListView.setAdapter(new ExampleApdater());
         mJANKBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,11 +48,6 @@ public class Example4Activity extends BaseActivity {
         });
         updateJANKText();
         updateStartText();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
     }
 
     private void updateJANKText() {

@@ -1,29 +1,36 @@
 package com.vip001.framemonitor.exam;
 
-import android.animation.ValueAnimator;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
 import android.widget.Button;
-import android.widget.ImageView;
 
 import com.vip001.framemonitor.BaseActivity;
 import com.vip001.framemonitor.JANKSwitch;
 import com.vip001.framemonitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
 
-public class Example3Activity extends BaseActivity {
-    private ImageView mImageView;
+/**
+ * @author xxd
+ * @date 2020-01-16
+ */
+public class ReceiverDropFrameActivity extends BaseActivity {
     private Button mJANKBtn;
     private Button mStartBtn;
-    private AlphaAnimation mAlphaAnimation;
+    private Button mSendBtn;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_valueanimator);
-        mImageView = this.findViewById(R.id.imageView);
+        mReceiver = new DropFrameReceiver();
+        this.registerReceiver(mReceiver, new IntentFilter("ReceiverDropFrameActivity"));
+        setContentView(R.layout.activity_receiver);
+        mSendBtn = this.findViewById(R.id.btn_send);
+
         mStartBtn = this.findViewById(R.id.stop);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,33 +43,8 @@ public class Example3Activity extends BaseActivity {
                 updateStartText();
             }
         });
-        mAlphaAnimation = new AlphaAnimation(0, 1);
-        mAlphaAnimation.setDuration(4000);
-        mAlphaAnimation.setRepeatMode(ValueAnimator.REVERSE);
-        mAlphaAnimation.setRepeatCount(-1);
-        mAlphaAnimation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
 
-            }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-                if (JANKSwitch.DEBUG_JANK) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        mImageView.startAnimation(mAlphaAnimation);
         mJANKBtn = (Button) this.findViewById(R.id.btn);
 
         mJANKBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +54,13 @@ public class Example3Activity extends BaseActivity {
                 updateJANKText();
             }
         });
+        mSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent("ReceiverDropFrameActivity");
+                ReceiverDropFrameActivity.this.sendBroadcast(intent);
+            }
+        });
         updateJANKText();
         updateStartText();
     }
@@ -79,7 +68,7 @@ public class Example3Activity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mAlphaAnimation.cancel();
+        unregisterReceiver(mReceiver);
     }
 
     private void updateJANKText() {

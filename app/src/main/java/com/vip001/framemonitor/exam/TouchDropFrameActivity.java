@@ -1,7 +1,8 @@
 package com.vip001.framemonitor.exam;
 
-import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,19 +13,32 @@ import com.vip001.framemonitor.R;
 import com.vip001.monitor.core.FrameMonitorManager;
 
 /**
- * Created by xxd on 2018/8/14
+ * @author xxd
+ * @date 2020-01-07
  */
-public class Example2Activity extends BaseActivity {
+public class TouchDropFrameActivity extends BaseActivity {
     private ImageView mImageView;
     private Button mJANKBtn;
     private Button mStartBtn;
-    private ValueAnimator mValueAnimator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_valueanimator);
+        setContentView(R.layout.activity_touch);
         mImageView = this.findViewById(R.id.imageView);
+        mImageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(JANKSwitch.DEBUG_JANK){
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return true;
+            }
+        });
         mStartBtn = this.findViewById(R.id.stop);
         mStartBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,24 +51,8 @@ public class Example2Activity extends BaseActivity {
                 updateStartText();
             }
         });
-        mValueAnimator = ValueAnimator.ofFloat(0, 1);
-        mValueAnimator.setDuration(4000);
-        mValueAnimator.setRepeatMode(ValueAnimator.REVERSE);
-        mValueAnimator.setRepeatCount(-1);
-        mValueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                if (JANKSwitch.DEBUG_JANK) {
-                    try {
-                        Thread.sleep(300);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                mImageView.setImageAlpha((int) (255 * animation.getAnimatedFraction()));
-            }
-        });
-        mValueAnimator.start();
+
+
         mJANKBtn = (Button) this.findViewById(R.id.btn);
 
         mJANKBtn.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +69,6 @@ public class Example2Activity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mValueAnimator.cancel();
     }
 
     private void updateJANKText() {

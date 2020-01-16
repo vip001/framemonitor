@@ -20,11 +20,14 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".exam.Example1Activity" />
-        <activity android:name=".exam.Example2Activity" />
-        <activity android:name=".exam.Example5Activity" />
-        <activity android:name=".exam.Example3Activity"></activity>
-        <activity android:name="com.vip001.framemonitor.exam.Example4Activity"></activity>
+        <activity android:name=".exam.ListPageSlideDropFrameActivity" />
+        <activity android:name=".exam.FlowStatisticActivity" />
+        <activity android:name="com.vip001.framemonitor.exam.TouchDropFrameActivity"></activity>
+        <activity android:name=".exam.ServiceDropFrameActivity"></activity>
+
+        <service android:name="com.vip001.framemonitor.exam.DropFrameService"></service>
+        <receiver android:name="com.vip001.framemonitor.exam.DropFrameReceiver"></receiver>
+        <activity android:name="com.vip001.framemonitor.exam.ReceiverDropFrameActivity"></activity>
     </application>
 
 </manifest>

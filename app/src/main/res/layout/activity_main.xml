@@ -18,30 +18,29 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/exam1"
+        android:id="@+id/btn_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:text="列表滑动卡顿"
         android:textSize="15dp" />
-
     <Button
-        android:id="@+id/exam2"
+        android:id="@+id/btn_receiver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="属性动画卡顿"
+        android:text="广播接收者卡顿"
         android:textSize="15dp" />
-
     <Button
-        android:id="@+id/exam3"
+        android:id="@+id/btn_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
-        android:text="Animation卡顿"
+        android:text="服务卡顿"
         android:textSize="15dp" />
+
     <Button
-        android:id="@+id/exam4"
+        android:id="@+id/btn_touch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -49,7 +48,7 @@
         android:textSize="15dp" />
 
     <Button
-        android:id="@+id/exam5"
+        android:id="@+id/btn_flow_statistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"

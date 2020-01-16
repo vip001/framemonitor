@@ -35,8 +35,8 @@ public class FrameCoreConfigPersistence implements IState {
             config.redTime = redTime;
             config.yellowTime = yellowTime;
         } else {
-            config.redTime = IConfig.FRAME_INTERVALS * 5;
-            config.yellowTime = IConfig.FRAME_INTERVALS;
+            config.redTime = IConfig.FRAME_INTERVALS * 8;
+            config.yellowTime = IConfig.FRAME_INTERVALS*2;
         }
         mConfig = config;
         mState.setState(mPreference.getInt(KEY_STATE, DEFAULT_STATE));
