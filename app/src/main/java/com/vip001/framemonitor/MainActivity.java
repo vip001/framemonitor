@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.vip001.framemonitor.exam.DropFrameService;
+import com.vip001.framemonitor.exam.FlowStatisticActivity;
 import com.vip001.framemonitor.exam.ListPageSlideDropFrameActivity;
 import com.vip001.framemonitor.exam.ReceiverDropFrameActivity;
 import com.vip001.framemonitor.exam.ServiceDropFrameActivity;
 import com.vip001.framemonitor.exam.TouchDropFrameActivity;
-import com.vip001.framemonitor.exam.FlowStatisticActivity;
 
 public class MainActivity extends BaseActivity {
 

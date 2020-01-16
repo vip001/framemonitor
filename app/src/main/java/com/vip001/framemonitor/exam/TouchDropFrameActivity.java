@@ -1,6 +1,5 @@
 package com.vip001.framemonitor.exam;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;

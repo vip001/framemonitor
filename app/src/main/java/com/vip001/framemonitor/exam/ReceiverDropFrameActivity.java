@@ -1,6 +1,5 @@
 package com.vip001.framemonitor.exam;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
